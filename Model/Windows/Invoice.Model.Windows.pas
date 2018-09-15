@@ -7,6 +7,9 @@ uses Invoice.Model.Windows.Interfaces, Winapi.Windows, Winapi.Messages, Vcl.Dial
 
 type
   TModelWindows = class(TInterfacedObject, iModelWindows)
+      constructor Create;
+      destructor Destroy; override;
+      class function New: iModelWindows;
       function GetWindowsUserName: String;
       function GetWindowsComputerName: String;
       function GetAppInfo(AppInfo: String): String;
@@ -36,6 +39,11 @@ begin
      if not GetUserName(Name, NameSize) then
           Name[0] := #0;
      result := UpperCase(StrPas(Name));
+end;
+
+class function TModelWindows.New: iModelWindows;
+begin
+     Result := Self.Create;
 end;
 
 function TModelWindows.GetAppInfo(AppInfo: String): String;
@@ -68,6 +76,16 @@ begin
           //
           FreeMem(Buf, SizeOf);
      end;
+end;
+
+constructor TModelWindows.Create;
+begin
+     //
+end;
+
+destructor TModelWindows.Destroy;
+begin
+     inherited;
 end;
 
 function TModelWindows.FileINI(FileName: String; Sector: String; Key: String; Value: String): String;

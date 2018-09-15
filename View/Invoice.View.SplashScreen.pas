@@ -21,11 +21,10 @@ type
      private
           { Private declarations }
           FModelWindows: iModelWindows;
-          procedure SetModelWindows(const Value: iModelWindows);
           procedure SetLabel;
      public
           { Public declarations }
-          property ModelWindows: iModelWindows read FModelWindows write SetModelWindows;
+          property ModelWindows: iModelWindows read FModelWindows write FModelWindows;
      end;
 
 var
@@ -49,16 +48,11 @@ end;
 
 procedure TfrmSplashScreen.SetLabel;
 begin
-     ModelWindows := TModelWindows.Create;
+     ModelWindows := TModelWindows.New;
      //
      LabelSoftware.Caption := Application.Title;
      LabelDeveloper.Caption := ModelWindows.GetAppInfo('CompanyName');
      LabelVersion.Caption := 'Version ' + ModelWindows.GetAppInfo('FileVersion');
-end;
-
-procedure TfrmSplashScreen.SetModelWindows(const Value: iModelWindows);
-begin
-     FModelWindows := Value;
 end;
 
 procedure TfrmSplashScreen.TimerTimer(Sender: TObject);

@@ -62,7 +62,7 @@ end;
 
 procedure TfrmMain.SetTitle;
 begin
-     ModelWindows := TModelWindows.Create;
+     ModelWindows := TModelWindows.New;
      //
      Caption := ModelWindows.GetAppInfo('CompanyName') + ' - ' + Application.Title;
 end;

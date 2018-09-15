@@ -92,8 +92,8 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>Invoice.ico</Icon_MainIcon>
-        <VerInfo_Build>26</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Invoice;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.26;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
+        <VerInfo_Build>27</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Invoice;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.27;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
