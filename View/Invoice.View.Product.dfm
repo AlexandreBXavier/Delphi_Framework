@@ -51,10 +51,6 @@ object frmProduct: TfrmProduct
     object TabSheet2: TTabSheet
       Caption = 'Details of Record'
       ImageIndex = 1
-      ExplicitLeft = 8
-      ExplicitTop = 22
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
   object DataSource: TDataSource

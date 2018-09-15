@@ -27,6 +27,7 @@ object frmMain: TfrmMain
     Top = 8
     object ActionProduct: TAction
       Caption = 'Products'
+      OnExecute = ActionProductExecute
     end
   end
   object ImageList: TImageList

@@ -1,4 +1,4 @@
-unit Demos.View.SplashScreen;
+unit Invoice.View.SplashScreen;
 
 interface
 
@@ -31,7 +31,7 @@ implementation
 
 {$R *.dfm}
 
-uses Demos.Model.DataModule;
+uses Invoice.Model.DataModule;
 
 procedure TfrmSplashScreen.FormClose(Sender: TObject; var Action: TCloseAction);
 begin

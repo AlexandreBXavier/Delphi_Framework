@@ -3,7 +3,7 @@
         <ProjectGuid>{B90D16E0-8528-450F-9D23-7F14B730AD35}</ProjectGuid>
         <ProjectVersion>18.4</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
-        <MainSource>AppInvoice.dpr</MainSource>
+        <MainSource>Invoice.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -58,7 +58,7 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <SanitizedProjectName>AppInvoice</SanitizedProjectName>
+        <SanitizedProjectName>Invoice</SanitizedProjectName>
         <Custom_Styles>Windows10|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10.vsf</Custom_Styles>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
@@ -66,7 +66,7 @@
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=Demos;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=AppInvoice;LegalCopyright=2018, Demos, All Rights Reserved;LegalTrademarks=Demos Inc;OriginalFilename=AppInvoice;ProgramID=com.demos.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Demos</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Invoice;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
@@ -89,9 +89,9 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <Icon_MainIcon>AppInvoice.ico</Icon_MainIcon>
-        <VerInfo_Build>5</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Demos;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.5;InternalName=AppInvoice;LegalCopyright=2018, Demos, All Rights Reserved;LegalTrademarks=Demos Inc;OriginalFilename=AppInvoice;ProgramID=com.demos.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Demos</VerInfo_Keys>
+        <Icon_MainIcon>Invoice.ico</Icon_MainIcon>
+        <VerInfo_Build>11</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Invoice;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.11;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -99,7 +99,7 @@
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
         <DCC_DebugInformation>0</DCC_DebugInformation>
         <VerInfo_Locale>1046</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=Demos;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=AppInvoice;LegalCopyright=2018, Demos, All Rights Reserved;LegalTrademarks=Demos Inc;OriginalFilename=AppInvoice;ProgramID=com.demos.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Demos</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Invoice;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -112,23 +112,29 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="View\Demos.View.Main.pas">
+        <DCCReference Include="View\Invoice.View.Main.pas">
             <Form>frmMain</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="View\Demos.View.SplashScreen.pas">
+        <DCCReference Include="View\Invoice.View.SplashScreen.pas">
             <Form>frmSplashScreen</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Model\Demos.Model.DataModule.pas">
+        <DCCReference Include="Model\Invoice.Model.DataModule.pas">
             <Form>frmDataModule</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="View\Demos.View.Product.pas">
+        <DCCReference Include="View\Invoice.View.Product.pas">
             <Form>frmProduct</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Model\Entity\Invoice.Model.Product.pas"/>
+        <DCCReference Include="Model\Entity\Invoice.Model.Customer.pas"/>
+        <DCCReference Include="Model\Entity\Invoice.Model.OrderPayment.pas"/>
+        <DCCReference Include="Model\Entity\Invoice.Model.Order.pas"/>
+        <DCCReference Include="Model\Entity\Invoice.Model.OrderProduct.pas"/>
+        <DCCReference Include="Model\Entity\Invoice.Model.TypePayment.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -147,11 +153,11 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">AppInvoice.dpr</Source>
+                    <Source Name="MainSource">Invoice.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
@@ -162,9 +168,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\AppInvoice.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\Invoice.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>AppInvoice.exe</RemoteName>
+                        <RemoteName>Invoice.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -595,6 +601,7 @@
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">False</Platform>
             </Platforms>
+            <ModelSupport>True</ModelSupport>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

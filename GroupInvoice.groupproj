@@ -1,9 +1,9 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{EEC96485-297B-4F3E-A98F-663CA4D04268}</ProjectGuid>
+        <ProjectGuid>{ECA0690A-8552-44A3-B049-BB8665F76154}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="AppInvoice.dproj">
+        <Projects Include="Invoice.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -14,23 +14,23 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="AppInvoice">
-        <MSBuild Projects="AppInvoice.dproj"/>
+    <Target Name="Invoice">
+        <MSBuild Projects="Invoice.dproj"/>
     </Target>
-    <Target Name="AppInvoice:Clean">
-        <MSBuild Projects="AppInvoice.dproj" Targets="Clean"/>
+    <Target Name="Invoice:Clean">
+        <MSBuild Projects="Invoice.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="AppInvoice:Make">
-        <MSBuild Projects="AppInvoice.dproj" Targets="Make"/>
+    <Target Name="Invoice:Make">
+        <MSBuild Projects="Invoice.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="AppInvoice"/>
+        <CallTarget Targets="Invoice"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AppInvoice:Clean"/>
+        <CallTarget Targets="Invoice:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AppInvoice:Make"/>
+        <CallTarget Targets="Invoice:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

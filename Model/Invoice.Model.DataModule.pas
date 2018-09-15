@@ -1,4 +1,4 @@
-unit Demos.Model.DataModule;
+unit Invoice.Model.DataModule;
 
 interface
 
@@ -19,7 +19,7 @@ type
           function GetWindowsComputerName: String;
           function GetAppInfo(AppInfo: String): String;
           function FileINI(FileName: String; Sector: String; Key: String; Value: String): String;
-    procedure DataModuleCreate(Sender: TObject);
+          procedure DataModuleCreate(Sender: TObject);
      private
           { Private declarations }
      public
@@ -32,6 +32,9 @@ var
 implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
+
+uses Invoice.Model.Customer, Invoice.Model.Order, Invoice.Model.OrderPayment, Invoice.Model.OrderProduct, Invoice.Model.Product, Invoice.Model.TypePayment;
+
 {$R *.dfm}
 
 function TfrmDataModule.GetWindowsUserName: String;

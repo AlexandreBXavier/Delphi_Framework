@@ -1,16 +1,22 @@
-program AppInvoice;
+program Invoice;
 
 uses
-     Vcl.Themes,
-     Vcl.Styles,
-     Vcl.Forms,
-     Vcl.Dialogs,
-     System.SysUtils,
-     Winapi.Windows,
-     Demos.View.Main in 'View\Demos.View.Main.pas' {frmMain} ,
-     Demos.View.SplashScreen in 'View\Demos.View.SplashScreen.pas' {frmSplashScreen} ,
-     Demos.Model.DataModule in 'Model\Demos.Model.DataModule.pas' {frmDataModule: TDataModule} ,
-     Demos.View.Product in 'View\Demos.View.Product.pas' {frmProduct};
+  Vcl.Themes,
+  Vcl.Styles,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  System.SysUtils,
+  Winapi.Windows,
+  Invoice.View.Main in 'View\Invoice.View.Main.pas' {frmMain},
+  Invoice.View.SplashScreen in 'View\Invoice.View.SplashScreen.pas' {frmSplashScreen},
+  Invoice.Model.DataModule in 'Model\Invoice.Model.DataModule.pas' {frmDataModule: TDataModule},
+  Invoice.View.Product in 'View\Invoice.View.Product.pas' {frmProduct},
+  Invoice.Model.Product in 'Model\Entity\Invoice.Model.Product.pas',
+  Invoice.Model.Customer in 'Model\Entity\Invoice.Model.Customer.pas',
+  Invoice.Model.OrderPayment in 'Model\Entity\Invoice.Model.OrderPayment.pas',
+  Invoice.Model.Order in 'Model\Entity\Invoice.Model.Order.pas',
+  Invoice.Model.OrderProduct in 'Model\Entity\Invoice.Model.OrderProduct.pas',
+  Invoice.Model.TypePayment in 'Model\Entity\Invoice.Model.TypePayment.pas';
 
 {$R *.res}
 
@@ -30,7 +36,6 @@ begin
           Application.Title := 'Invoice Software';
           //
           Application.CreateForm(TfrmDataModule, frmDataModule);
-          // Display Splash Screen...
           try
                frmSplashScreen := TfrmSplashScreen.Create(Application);
                //
@@ -39,7 +44,7 @@ begin
                Application.ProcessMessages;
                //
                Application.CreateForm(TfrmMain, frmMain);
-          end;
+		end;
           //
           Application.Run;
      end

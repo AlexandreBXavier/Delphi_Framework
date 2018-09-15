@@ -1,4 +1,4 @@
-unit Demos.View.Main;
+unit Invoice.View.Main;
 
 interface
 
@@ -14,7 +14,8 @@ type
           ActionProduct: TAction;
           ImageList: TImageList;
           procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure FormShow(Sender: TObject);
+          procedure FormShow(Sender: TObject);
+    procedure ActionProductExecute(Sender: TObject);
      private
           { Private declarations }
      public
@@ -28,7 +29,14 @@ implementation
 
 {$R *.dfm}
 
-uses Demos.Model.DataModule;
+uses Invoice.Model.DataModule, Invoice.View.Product;
+
+procedure TfrmMain.ActionProductExecute(Sender: TObject);
+begin
+     frmProduct := TfrmProduct.Create(Self);
+     //
+     frmProduct.ShowModal;
+end;
 
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
