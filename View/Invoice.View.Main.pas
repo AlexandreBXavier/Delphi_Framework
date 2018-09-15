@@ -1,11 +1,11 @@
 unit Invoice.View.Main;
-
+
 interface
 
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList, Vcl.Menus, System.UITypes,
-     System.ImageList, Vcl.ImgList;
+     System.ImageList, Vcl.ImgList, Invoice.Model.Windows.Interfaces, Invoice.Model.Windows;
 
 type
      TfrmMain = class(TForm)
@@ -15,11 +15,15 @@ type
           ImageList: TImageList;
           procedure FormClose(Sender: TObject; var Action: TCloseAction);
           procedure FormShow(Sender: TObject);
-    procedure ActionProductExecute(Sender: TObject);
+          procedure ActionProductExecute(Sender: TObject);
      private
           { Private declarations }
+          FModelWindows: iModelWindows;
+          procedure SetModelWindows(const Value: iModelWindows);
+          procedure SetTitle;
      public
           { Public declarations }
+          property ModelWindows: iModelWindows read FModelWindows write SetModelWindows;
      end;
 
 var
@@ -29,7 +33,7 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.Model.DataModule, Invoice.View.Product;
+uses Invoice.View.Product;
 
 procedure TfrmMain.ActionProductExecute(Sender: TObject);
 begin
@@ -48,7 +52,20 @@ end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
-     Caption := frmDataModule.GetAppInfo('CompanyName') + ' - ' + Application.Title;
+     SetTitle;
+end;
+
+procedure TfrmMain.SetModelWindows(const Value: iModelWindows);
+begin
+     FModelWindows := Value;
+end;
+
+procedure TfrmMain.SetTitle;
+begin
+     ModelWindows := TModelWindows.Create;
+     //
+     Caption := ModelWindows.GetAppInfo('CompanyName') + ' - ' + Application.Title;
 end;
 
 end.
+

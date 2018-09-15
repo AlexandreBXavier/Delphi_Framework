@@ -30,8 +30,8 @@ object frmSplashScreen: TfrmSplashScreen
     object imageBackground: TImage
       Left = 4
       Top = 4
-      Width = 502
-      Height = 292
+      Width = 500
+      Height = 290
       Align = alClient
       AutoSize = True
       Center = True

@@ -70,6 +70,8 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <DCC_Hints>false</DCC_Hints>
+        <DCC_Warnings>false</DCC_Warnings>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;fmxase;DBXDb2Driver;DBXInterBaseDriver;vclactnband;vclFireDAC;tethering;FireDACADSDriver;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;DBXOracleDriver;inetdb;emsedge;fmx;fmxdae;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;DataSnapConnectors;VCLRESTComponents;vclie;bindengine;DBXMySQLDriver;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;DataSnapClient;IndyIPCommon;bindcompdbx;vcl;IndyIPServer;DBXSybaseASEDriver;IndySystem;FireDACDb2Driver;dsnapcon;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;emshosting;FireDACPgDriver;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;DbxCommonDriver;DataSnapServer;xmlrtl;DataSnapNativeClient;fmxobj;vclwinx;FireDACDSDriver;rtl;DbxClientDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;bindcomp;appanalytics;DBXInformixDriver;IndyIPClient;bindcompvcl;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;inetdbxpress;FireDACMongoDBDriver;DataSnapServerMidas;$(DCC_UsePackage)</DCC_UsePackage>
@@ -90,8 +92,8 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>Invoice.ico</Icon_MainIcon>
-        <VerInfo_Build>11</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Invoice;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.11;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
+        <VerInfo_Build>26</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Invoice;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.26;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -120,11 +122,6 @@
             <Form>frmSplashScreen</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Model\Invoice.Model.DataModule.pas">
-            <Form>frmDataModule</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
         <DCCReference Include="View\Invoice.View.Product.pas">
             <Form>frmProduct</Form>
             <FormType>dfm</FormType>
@@ -135,6 +132,13 @@
         <DCCReference Include="Model\Entity\Invoice.Model.Order.pas"/>
         <DCCReference Include="Model\Entity\Invoice.Model.OrderProduct.pas"/>
         <DCCReference Include="Model\Entity\Invoice.Model.TypePayment.pas"/>
+        <DCCReference Include="Model\Connections\Invoice.Model.Connections.Factory.Connection.pas"/>
+        <DCCReference Include="Model\Connections\Invoice.Model.Connections.Factory.DataSet.pas"/>
+        <DCCReference Include="Model\Connections\Invoice.Model.Connections.Interfaces.pas"/>
+        <DCCReference Include="Model\Connections\Firedac\Invoice.Model.Connections.ConnectionFiredac.pas"/>
+        <DCCReference Include="Model\Connections\Firedac\Invoice.Model.Connections.TableFiredac.pas"/>
+        <DCCReference Include="Model\Windows\Invoice.Model.Windows.pas"/>
+        <DCCReference Include="Model\Windows\Invoice.Model.Windows.Interfaces.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -601,7 +605,6 @@
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">False</Platform>
             </Platforms>
-            <ModelSupport>True</ModelSupport>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

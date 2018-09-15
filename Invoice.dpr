@@ -9,14 +9,20 @@ uses
   Winapi.Windows,
   Invoice.View.Main in 'View\Invoice.View.Main.pas' {frmMain},
   Invoice.View.SplashScreen in 'View\Invoice.View.SplashScreen.pas' {frmSplashScreen},
-  Invoice.Model.DataModule in 'Model\Invoice.Model.DataModule.pas' {frmDataModule: TDataModule},
   Invoice.View.Product in 'View\Invoice.View.Product.pas' {frmProduct},
   Invoice.Model.Product in 'Model\Entity\Invoice.Model.Product.pas',
   Invoice.Model.Customer in 'Model\Entity\Invoice.Model.Customer.pas',
   Invoice.Model.OrderPayment in 'Model\Entity\Invoice.Model.OrderPayment.pas',
   Invoice.Model.Order in 'Model\Entity\Invoice.Model.Order.pas',
   Invoice.Model.OrderProduct in 'Model\Entity\Invoice.Model.OrderProduct.pas',
-  Invoice.Model.TypePayment in 'Model\Entity\Invoice.Model.TypePayment.pas';
+  Invoice.Model.TypePayment in 'Model\Entity\Invoice.Model.TypePayment.pas',
+  Invoice.Model.Connections.Factory.Connection in 'Model\Connections\Invoice.Model.Connections.Factory.Connection.pas',
+  Invoice.Model.Connections.Factory.DataSet in 'Model\Connections\Invoice.Model.Connections.Factory.DataSet.pas',
+  Invoice.Model.Connections.Interfaces in 'Model\Connections\Invoice.Model.Connections.Interfaces.pas',
+  Invoice.Model.Connections.ConnectionFiredac in 'Model\Connections\Firedac\Invoice.Model.Connections.ConnectionFiredac.pas',
+  Invoice.Model.Connections.TableFiredac in 'Model\Connections\Firedac\Invoice.Model.Connections.TableFiredac.pas',
+  Invoice.Model.Windows in 'Model\Windows\Invoice.Model.Windows.pas',
+  Invoice.Model.Windows.Interfaces in 'Model\Windows\Invoice.Model.Windows.Interfaces.pas';
 
 {$R *.res}
 
@@ -35,17 +41,16 @@ begin
           // TStyleManager.TrySetStyle('Windows10');
           Application.Title := 'Invoice Software';
           //
-          Application.CreateForm(TfrmDataModule, frmDataModule);
           try
                frmSplashScreen := TfrmSplashScreen.Create(Application);
-               //
-               frmSplashScreen.Show;
           finally
-               Application.ProcessMessages;
-               //
-               Application.CreateForm(TfrmMain, frmMain);
-		end;
+               frmSplashScreen.Show;
+          end;
           //
+          Application.ProcessMessages;
+          //
+          Application.CreateForm(TfrmMain, frmMain);
+  //
           Application.Run;
      end
      else
