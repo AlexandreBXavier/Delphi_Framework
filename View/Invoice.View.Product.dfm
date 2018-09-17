@@ -1,23 +1,22 @@
 object frmProduct: TfrmProduct
   Left = 0
   Top = 0
-  Caption = 'frmProduct'
-  ClientHeight = 480
-  ClientWidth = 640
+  ClientHeight = 397
+  ClientWidth = 662
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
+  OldCreateOrder = True
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object DBNavigator: TDBNavigator
     Left = 0
-    Top = 440
-    Width = 640
+    Top = 357
+    Width = 662
     Height = 40
     DataSource = DataSource
     Align = alBottom
@@ -26,18 +25,18 @@ object frmProduct: TfrmProduct
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 640
-    Height = 440
-    ActivePage = TabSheetList
+    Width = 662
+    Height = 357
+    ActivePage = TabList
     Align = alClient
     TabOrder = 1
-    object TabSheetList: TTabSheet
+    object TabList: TTabSheet
       Caption = 'List of Records'
       object DBGridRecords: TDBGrid
         Left = 0
         Top = 0
-        Width = 632
-        Height = 412
+        Width = 654
+        Height = 329
         Align = alClient
         DataSource = DataSource
         TabOrder = 0
@@ -48,9 +47,13 @@ object frmProduct: TfrmProduct
         TitleFont.Style = []
       end
     end
-    object TabSheet2: TTabSheet
+    object TabInfo: TTabSheet
       Caption = 'Details of Record'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
   object DataSource: TDataSource

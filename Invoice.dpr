@@ -5,6 +5,7 @@ uses
   Vcl.Styles,
   Vcl.Forms,
   Vcl.Dialogs,
+  System.Classes,
   System.SysUtils,
   Winapi.Windows,
   Invoice.View.Main in 'View\Invoice.View.Main.pas' {frmMain},
@@ -35,7 +36,7 @@ var
      SystemName: PChar;
 
 begin
-     SystemName := 'Invoice Software';
+     SystemName := 'Invoice Software ®';
      CreateMutex(Nil, False, SystemName);
 
      // Verify that the executable has already been started ...
@@ -44,7 +45,7 @@ begin
           Application.Initialize;
           Application.MainFormOnTaskbar := True;
           // TStyleManager.TrySetStyle('Windows10');
-          Application.Title := 'Invoice Software';
+          Application.Title := 'Invoice Software ®';
           //
           Application.CreateForm(TfrmMain, frmMain);
           //
