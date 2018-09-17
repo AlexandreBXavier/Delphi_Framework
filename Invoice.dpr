@@ -21,8 +21,13 @@ uses
   Invoice.Model.Connections.Interfaces in 'Model\Connections\Invoice.Model.Connections.Interfaces.pas',
   Invoice.Model.Connections.ConnectionFiredac in 'Model\Connections\Firedac\Invoice.Model.Connections.ConnectionFiredac.pas',
   Invoice.Model.Connections.TableFiredac in 'Model\Connections\Firedac\Invoice.Model.Connections.TableFiredac.pas',
-  Invoice.Model.Windows in 'Model\Windows\Invoice.Model.Windows.pas',
-  Invoice.Model.Windows.Interfaces in 'Model\Windows\Invoice.Model.Windows.Interfaces.pas';
+  Invoice.Controller.Interfaces in 'Controller\Invoice.Controller.Interfaces.pas',
+  Invoice.Controller.AppInfo.Factory in 'Controller\Invoice.Controller.AppInfo.Factory.pas',
+  Invoice.Controller.WinInfo.Factory in 'Controller\Invoice.Controller.WinInfo.Factory.pas',
+  Invoice.Controller.IniFile.Factory in 'Controller\Invoice.Controller.IniFile.Factory.pas',
+  Invoice.Controller.AppInfo.Default in 'Controller\Invoice.Controller.AppInfo.Default.pas',
+  Invoice.Controller.WinInfo.Default in 'Controller\Invoice.Controller.WinInfo.Default.pas',
+  Invoice.Controller.IniFile.Default in 'Controller\Invoice.Controller.IniFile.Default.pas';
 
 {$R *.res}
 
@@ -41,6 +46,10 @@ begin
           // TStyleManager.TrySetStyle('Windows10');
           Application.Title := 'Invoice Software';
           //
+          Application.CreateForm(TfrmMain, frmMain);
+          //
+          Application.ProcessMessages;
+          //
           try
                frmSplashScreen := TfrmSplashScreen.Create(Application);
           finally
@@ -49,8 +58,6 @@ begin
           //
           Application.ProcessMessages;
           //
-          Application.CreateForm(TfrmMain, frmMain);
-  //
           Application.Run;
      end
      else

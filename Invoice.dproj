@@ -92,8 +92,8 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>Invoice.ico</Icon_MainIcon>
-        <VerInfo_Build>27</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Invoice;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.27;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
+        <VerInfo_Build>49</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Invoice;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.49;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -137,8 +137,13 @@
         <DCCReference Include="Model\Connections\Invoice.Model.Connections.Interfaces.pas"/>
         <DCCReference Include="Model\Connections\Firedac\Invoice.Model.Connections.ConnectionFiredac.pas"/>
         <DCCReference Include="Model\Connections\Firedac\Invoice.Model.Connections.TableFiredac.pas"/>
-        <DCCReference Include="Model\Windows\Invoice.Model.Windows.pas"/>
-        <DCCReference Include="Model\Windows\Invoice.Model.Windows.Interfaces.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.Interfaces.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.AppInfo.Factory.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.WinInfo.Factory.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.IniFile.Factory.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.AppInfo.Default.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.WinInfo.Default.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.IniFile.Default.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

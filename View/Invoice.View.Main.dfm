@@ -15,9 +15,33 @@ object frmMain: TfrmMain
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnCreate = FormCreate
+  OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object StatusBar: TStatusBar
+    Left = 0
+    Top = 591
+    Width = 810
+    Height = 19
+    Panels = <
+      item
+        Alignment = taCenter
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        Width = 150
+      end
+      item
+        Alignment = taCenter
+        Width = 150
+      end
+      item
+        Width = 150
+      end>
+  end
   object MainMenu: TMainMenu
     Left = 16
     Top = 8

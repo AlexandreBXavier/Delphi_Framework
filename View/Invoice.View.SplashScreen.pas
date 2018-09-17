@@ -4,8 +4,7 @@ interface
 
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-     Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-     Vcl.Imaging.pngimage, Invoice.Model.Windows.Interfaces, Invoice.Model.Windows;
+     Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
 
 type
      TfrmSplashScreen = class(TForm)
@@ -20,11 +19,9 @@ type
           procedure FormShow(Sender: TObject);
      private
           { Private declarations }
-          FModelWindows: iModelWindows;
           procedure SetLabel;
      public
           { Public declarations }
-          property ModelWindows: iModelWindows read FModelWindows write FModelWindows;
      end;
 
 var
@@ -33,6 +30,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses Invoice.Controller.AppInfo.Factory;
 
 procedure TfrmSplashScreen.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -48,11 +47,9 @@ end;
 
 procedure TfrmSplashScreen.SetLabel;
 begin
-     ModelWindows := TModelWindows.New;
-     //
      LabelSoftware.Caption := Application.Title;
-     LabelDeveloper.Caption := ModelWindows.GetAppInfo('CompanyName');
-     LabelVersion.Caption := 'Version ' + ModelWindows.GetAppInfo('FileVersion');
+     LabelDeveloper.Caption := TControllerAppInfoFactory.New.Default.CompanyName;
+     LabelVersion.Caption := 'Version ' + TControllerAppInfoFactory.New.Default.FileVersion;
 end;
 
 procedure TfrmSplashScreen.TimerTimer(Sender: TObject);
