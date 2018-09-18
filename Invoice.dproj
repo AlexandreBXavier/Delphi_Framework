@@ -92,8 +92,8 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>Invoice.ico</Icon_MainIcon>
-        <VerInfo_Build>64</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.64;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
+        <VerInfo_Build>66</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.66;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -120,6 +120,12 @@
         </DCCReference>
         <DCCReference Include="View\Invoice.View.SplashScreen.pas">
             <Form>frmSplashScreen</Form>
+        </DCCReference>
+        <DCCReference Include="View\Invoice.View.Customer.pas">
+            <Form>frmCustomer</Form>
+        </DCCReference>
+        <DCCReference Include="View\Invoice.View.TypePayment.pas">
+            <Form>frmTypePayment</Form>
         </DCCReference>
         <DCCReference Include="View\Invoice.View.Product.pas">
             <Form>frmProduct</Form>

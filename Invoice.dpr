@@ -10,6 +10,8 @@ uses
   Winapi.Windows,
   Invoice.View.Main in 'View\Invoice.View.Main.pas' {frmMain},
   Invoice.View.SplashScreen in 'View\Invoice.View.SplashScreen.pas' {frmSplashScreen},
+  Invoice.View.Customer in 'View\Invoice.View.Customer.pas' {frmCustomer},
+  Invoice.View.TypePayment in 'View\Invoice.View.TypePayment.pas' {frmTypePayment},
   Invoice.View.Product in 'View\Invoice.View.Product.pas' {frmProduct},
   Invoice.Model.Product in 'Model\Entity\Invoice.Model.Product.pas',
   Invoice.Model.Customer in 'Model\Entity\Invoice.Model.Customer.pas',

@@ -56,7 +56,7 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.View.Product, Invoice.Controller.AppInfo.Factory, Invoice.Controller.WinInfo.Factory, Invoice.Controller.IniFile.Factory;
+uses Invoice.Controller.AppInfo.Factory, Invoice.Controller.WinInfo.Factory, Invoice.Controller.IniFile.Factory;
 
 procedure TfrmMain.SetTabSheet(Sender: TObject; NameForm: String);
 var
@@ -107,7 +107,7 @@ end;
 
 procedure TfrmMain.ActionCustomerExecute(Sender: TObject);
 begin
-     SetTabSheet(Sender, '');
+     SetTabSheet(Sender, 'frmCustomer');
 end;
 
 procedure TfrmMain.ActionOrderExecute(Sender: TObject);
@@ -122,7 +122,7 @@ end;
 
 procedure TfrmMain.ActionTypePaymentExecute(Sender: TObject);
 begin
-     SetTabSheet(Sender, '');
+     SetTabSheet(Sender, 'frmTypePayment');
 end;
 
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -136,8 +136,6 @@ end;
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
      SetConfig;
-     //
-     RegisterClass(TfrmProduct);
 end;
 
 procedure TfrmMain.FormResize(Sender: TObject);

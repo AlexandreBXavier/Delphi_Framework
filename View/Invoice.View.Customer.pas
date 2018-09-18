@@ -1,4 +1,4 @@
-unit Invoice.View.Product;
+unit Invoice.View.Customer;
 
 interface
 
@@ -8,7 +8,7 @@ uses
      Vcl.DBCtrls;
 
 type
-     TfrmProduct = class(TForm)
+     TfrmCustomer = class(TForm)
           DBNavigator: TDBNavigator;
           PageControl: TPageControl;
           TabList: TTabSheet;
@@ -23,24 +23,24 @@ type
      end;
 
 var
-     frmProduct: TfrmProduct;
+     frmCustomer: TfrmCustomer;
 
 implementation
 
 {$R *.dfm}
 
-procedure TfrmProduct.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TfrmCustomer.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
      Action := caFree;
 end;
 
 Initialization
 
-RegisterClass(TfrmProduct);
+RegisterClass(TfrmCustomer);
 
 Finalization
 
-UnRegisterClass(TfrmProduct);
+UnRegisterClass(TfrmCustomer);
 
 end.
 
