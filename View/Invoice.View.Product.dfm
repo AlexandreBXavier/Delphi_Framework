@@ -1,8 +1,10 @@
-object frmProduct: TfrmProduct
+object FormProduct: TFormProduct
   Left = 0
   Top = 0
-  ClientHeight = 397
-  ClientWidth = 662
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  ClientHeight = 407
+  ClientWidth = 672
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,28 +17,34 @@ object frmProduct: TfrmProduct
   TextHeight = 13
   object DBNavigator: TDBNavigator
     Left = 0
-    Top = 357
-    Width = 662
+    Top = 367
+    Width = 672
     Height = 40
     DataSource = DataSource
     Align = alBottom
     TabOrder = 0
+    ExplicitTop = 357
+    ExplicitWidth = 662
   end
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 662
-    Height = 357
+    Width = 672
+    Height = 367
     ActivePage = TabList
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 662
+    ExplicitHeight = 357
     object TabList: TTabSheet
       Caption = 'List of Records'
+      ExplicitWidth = 654
+      ExplicitHeight = 329
       object DBGridRecords: TDBGrid
         Left = 0
         Top = 0
-        Width = 654
-        Height = 329
+        Width = 664
+        Height = 339
         Align = alClient
         DataSource = DataSource
         TabOrder = 0

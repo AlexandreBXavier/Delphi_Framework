@@ -60,13 +60,15 @@
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <SanitizedProjectName>Invoice</SanitizedProjectName>
         <Custom_Styles>Windows10|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10.vsf</Custom_Styles>
+        <VerInfo_Locale>1046</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;fmxase;DBXDb2Driver;DBXInterBaseDriver;vclactnband;vclFireDAC;tethering;svnui;FireDACADSDriver;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;svn;DBXOracleDriver;inetdb;emsedge;fmx;fmxdae;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;DataSnapConnectors;VCLRESTComponents;vclie;bindengine;DBXMySQLDriver;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;DataSnapClient;IndyIPCommon;bindcompdbx;vcl;IndyIPServer;DBXSybaseASEDriver;IndySystem;FireDACDb2Driver;dsnapcon;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;emshosting;FireDACPgDriver;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;DbxCommonDriver;DataSnapServer;xmlrtl;DataSnapNativeClient;fmxobj;vclwinx;FireDACDSDriver;rtl;DbxClientDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;bindcomp;appanalytics;DBXInformixDriver;IndyIPClient;bindcompvcl;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;inetdbxpress;FireDACMongoDBDriver;DataSnapServerMidas;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=http://www.embarcadero.com;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
@@ -92,8 +94,8 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>Invoice.ico</Icon_MainIcon>
-        <VerInfo_Build>66</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.66;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
+        <VerInfo_Build>85</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.85;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=http://www.embarcadero.com;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -109,26 +111,32 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=Invoice Inc;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=http://www.embarcadero.com;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="View\Invoice.View.Main.pas">
-            <Form>frmMain</Form>
-        </DCCReference>
         <DCCReference Include="View\Invoice.View.SplashScreen.pas">
-            <Form>frmSplashScreen</Form>
+            <Form>FormSplashScreen</Form>
+        </DCCReference>
+        <DCCReference Include="View\Invoice.View.LogIn.pas">
+            <Form>FormLogin</Form>
+        </DCCReference>
+        <DCCReference Include="View\Invoice.View.Main.pas">
+            <Form>FormMain</Form>
         </DCCReference>
         <DCCReference Include="View\Invoice.View.Customer.pas">
-            <Form>frmCustomer</Form>
+            <Form>FormCustomer</Form>
         </DCCReference>
         <DCCReference Include="View\Invoice.View.TypePayment.pas">
-            <Form>frmTypePayment</Form>
+            <Form>FormTypePayment</Form>
         </DCCReference>
         <DCCReference Include="View\Invoice.View.Product.pas">
-            <Form>frmProduct</Form>
+            <Form>FormProduct</Form>
+        </DCCReference>
+        <DCCReference Include="View\Invoice.View.Order.pas">
+            <Form>FormOrder</Form>
         </DCCReference>
         <DCCReference Include="Model\Entity\Invoice.Model.Product.pas"/>
         <DCCReference Include="Model\Entity\Invoice.Model.Customer.pas"/>
@@ -142,12 +150,16 @@
         <DCCReference Include="Model\Connections\Firedac\Invoice.Model.Connections.ConnectionFiredac.pas"/>
         <DCCReference Include="Model\Connections\Firedac\Invoice.Model.Connections.TableFiredac.pas"/>
         <DCCReference Include="Controller\Invoice.Controller.Interfaces.pas"/>
-        <DCCReference Include="Controller\Invoice.Controller.AppInfo.Factory.pas"/>
-        <DCCReference Include="Controller\Invoice.Controller.WinInfo.Factory.pas"/>
-        <DCCReference Include="Controller\Invoice.Controller.IniFile.Factory.pas"/>
         <DCCReference Include="Controller\Invoice.Controller.AppInfo.Default.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.AppInfo.Factory.pas"/>
         <DCCReference Include="Controller\Invoice.Controller.WinInfo.Default.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.WinInfo.Factory.pas"/>
         <DCCReference Include="Controller\Invoice.Controller.IniFile.Default.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.IniFile.Factory.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.Security.Default.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.TabForm.Default.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.TabForm.Factory.pas"/>
+        <DCCReference Include="Controller\Invoice.Controller.Security.Factory.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

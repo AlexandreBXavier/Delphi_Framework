@@ -2,10 +2,14 @@ unit Invoice.Controller.Interfaces;
 
 interface
 
+uses Vcl.ComCtrls, Vcl.ActnList, System.Classes;
+
 type
      iControllerIniFileDefault = interface;
      iControllerWinInfoDefault = interface;
      iControllerAppInfoDefault = interface;
+     iControllerTabFormDefault = interface;
+     iControllerSecurityDefault = interface;
 
      iControllerIniFileFactory = interface
           ['{353DEFB6-3AF0-44D0-84EB-D520E664417E}']
@@ -45,6 +49,29 @@ type
           function ProductName: String;
           function ProductVersion: String;
           function Comments: String;
+     end;
+
+     iControllerTabFormFactory = interface
+          ['{94895871-5E89-4FF0-8D18-F893C59FF869}']
+          function Default: iControllerTabFormDefault;
+     end;
+
+     iControllerTabFormDefault = interface
+          ['{E75A0D8A-5BC5-44A9-AE4A-45ED9E9D3324}']
+          function CreateTab(aAction: TAction; aPageControl: TPageControl): TTabSheet;
+          procedure ShowForm(aTabSheet: TTabSheet; NameForm: String);
+     end;
+
+     iControllerSecurityFactory = interface
+          ['{F4D1C694-628D-4691-BFF8-83DE765F47F5}']
+          function Default: iControllerSecurityDefault;
+     end;
+
+     iControllerSecurityDefault = interface
+          ['{5B1DA1D8-DF07-4627-9CFE-0B4F68CDA640}']
+          function Login(aUser, aPasswood: String): Boolean;
+          function ShowLog: TStrings;
+          function AddLog(aLog: String): iControllerSecurityDefault;
      end;
 
 

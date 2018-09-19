@@ -1,4 +1,4 @@
-object frmSplashScreen: TfrmSplashScreen
+object FormSplashScreen: TFormSplashScreen
   Left = 0
   Top = 0
   BorderIcons = []

@@ -1,5 +1,5 @@
 unit Invoice.View.SplashScreen;
-
+
 interface
 
 uses
@@ -7,7 +7,7 @@ uses
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
 
 type
-     TfrmSplashScreen = class(TForm)
+     TFormSplashScreen = class(TForm)
           Timer: TTimer;
           panelBackgound: TPanel;
           LabelSoftware: TLabel;
@@ -25,7 +25,7 @@ type
      end;
 
 var
-     frmSplashScreen: TfrmSplashScreen;
+     FormSplashScreen: TFormSplashScreen;
 
 implementation
 
@@ -33,28 +33,29 @@ implementation
 
 uses Invoice.Controller.AppInfo.Factory;
 
-procedure TfrmSplashScreen.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFormSplashScreen.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
      Action := caFree;
 end;
 
-procedure TfrmSplashScreen.FormShow(Sender: TObject);
+procedure TFormSplashScreen.FormShow(Sender: TObject);
 begin
      SetLabel;
      //
      Timer.Enabled := True;
 end;
 
-procedure TfrmSplashScreen.SetLabel;
+procedure TFormSplashScreen.SetLabel;
 begin
      LabelSoftware.Caption := Application.Title;
      LabelDeveloper.Caption := TControllerAppInfoFactory.New.Default.CompanyName;
      LabelVersion.Caption := 'Version ' + TControllerAppInfoFactory.New.Default.FileVersion;
 end;
 
-procedure TfrmSplashScreen.TimerTimer(Sender: TObject);
+procedure TFormSplashScreen.TimerTimer(Sender: TObject);
 begin
      Close;
 end;
 
 end.
+

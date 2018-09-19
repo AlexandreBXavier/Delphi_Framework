@@ -8,7 +8,7 @@ uses
      Vcl.DBCtrls;
 
 type
-     TfrmTypePayment = class(TForm)
+     TFormTypePayment = class(TForm)
           DBNavigator: TDBNavigator;
           PageControl: TPageControl;
           TabList: TTabSheet;
@@ -23,24 +23,24 @@ type
      end;
 
 var
-     frmTypePayment: TfrmTypePayment;
+     FormTypePayment: TFormTypePayment;
 
 implementation
 
 {$R *.dfm}
 
-procedure TfrmTypePayment.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFormTypePayment.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
      Action := caFree;
 end;
 
 Initialization
 
-RegisterClass(TfrmTypePayment);
+RegisterClass(TFormTypePayment);
 
 Finalization
 
-UnRegisterClass(TfrmTypePayment);
+UnRegisterClass(TFormTypePayment);
 
 end.
 

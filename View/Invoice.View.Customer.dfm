@@ -1,6 +1,7 @@
-object frmCustomer: TfrmCustomer
+object FormCustomer: TFormCustomer
   Left = 0
   Top = 0
+  Caption = 'Customer'
   ClientHeight = 397
   ClientWidth = 662
   Color = clBtnFace
@@ -50,10 +51,6 @@ object frmCustomer: TfrmCustomer
     object TabInfo: TTabSheet
       Caption = 'Details of Record'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
   object DataSource: TDataSource

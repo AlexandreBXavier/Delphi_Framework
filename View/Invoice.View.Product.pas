@@ -8,7 +8,7 @@ uses
      Vcl.DBCtrls;
 
 type
-     TfrmProduct = class(TForm)
+     TFormProduct = class(TForm)
           DBNavigator: TDBNavigator;
           PageControl: TPageControl;
           TabList: TTabSheet;
@@ -23,24 +23,24 @@ type
      end;
 
 var
-     frmProduct: TfrmProduct;
+     FormProduct: TFormProduct;
 
 implementation
 
 {$R *.dfm}
 
-procedure TfrmProduct.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFormProduct.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
      Action := caFree;
 end;
 
 Initialization
 
-RegisterClass(TfrmProduct);
+RegisterClass(TFormProduct);
 
 Finalization
 
-UnRegisterClass(TfrmProduct);
+UnRegisterClass(TFormProduct);
 
 end.
 

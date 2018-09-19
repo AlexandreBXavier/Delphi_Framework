@@ -6,10 +6,11 @@ uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList, Vcl.Menus, System.UITypes,
      System.ImageList, Vcl.ImgList, Vcl.ComCtrls, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
-     Vcl.ToolWin, Vcl.ActnCtrls, Vcl.Ribbon, Vcl.RibbonLunaStyleActnCtrls, Vcl.RibbonSilverStyleActnCtrls;
+     Vcl.ToolWin, Vcl.ActnCtrls, Vcl.Ribbon, Vcl.RibbonLunaStyleActnCtrls, Vcl.RibbonSilverStyleActnCtrls,
+     Vcl.OleCtrls, SHDocVw, Vcl.AppEvnts;
 
 type
-     TfrmMain = class(TForm)
+     TFormMain = class(TForm)
           StatusBar: TStatusBar;
           Ribbon: TRibbon;
           RibbonPageMain: TRibbonPage;
@@ -25,6 +26,8 @@ type
           PageControl: TPageControl;
           TabWelcome: TTabSheet;
           ImageListTabs: TImageList;
+          WebBrowser: TWebBrowser;
+          ApplicationEvents: TApplicationEvents;
           procedure FormClose(Sender: TObject; var Action: TCloseAction);
           procedure FormShow(Sender: TObject);
           procedure FormResize(Sender: TObject);
@@ -33,6 +36,7 @@ type
           procedure ActionCustomerExecute(Sender: TObject);
           procedure ActionOrderExecute(Sender: TObject);
           procedure ActionTypePaymentExecute(Sender: TObject);
+          procedure ApplicationEventsException(Sender: TObject; E: Exception);
      private
           { Private declarations }
           FServerName: String;
@@ -42,90 +46,63 @@ type
           //
           procedure SetTitle;
           procedure SetStatus;
+          procedure SetWebPage(WebAddress: String);
           procedure SetConfig;
-          procedure SetTabSheet(Sender: TObject; NameForm: String);
-          procedure SetTabSheetWithForm(aTabSheet: TTabSheet; NameForm: String);
      public
           { Public declarations }
      end;
 
 var
-     frmMain: TfrmMain;
+     FormMain: TFormMain;
 
 implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.AppInfo.Factory, Invoice.Controller.WinInfo.Factory, Invoice.Controller.IniFile.Factory;
+uses Invoice.Controller.TabForm.Factory, Invoice.Controller.AppInfo.Factory, Invoice.Controller.WinInfo.Factory, Invoice.Controller.IniFile.Factory, Invoice.Controller.Security.Factory;
 
-procedure TfrmMain.SetTabSheet(Sender: TObject; NameForm: String);
-var
-     aTabSheet: TTabSheet;
-     TabName: String;
+procedure TFormMain.ActionCustomerExecute(Sender: TObject);
 begin
      TAction(Sender).Enabled := False;
      //
-     TabName := 'Tab' + TAction(Sender).Name;
-     //
-     aTabSheet := PageControl.FindComponent(TabName) as TTabSheet;
-     //
-     if not Assigned(aTabSheet) then
-     begin
-          aTabSheet := TTabSheet.Create(PageControl);
-          aTabSheet.Name := TabName;
-          aTabSheet.Caption := TAction(Sender).Caption;
-          aTabSheet.PageControl := PageControl;
-          aTabSheet.ImageIndex := 0;
-          aTabSheet.Hint := '';
-     end;
-     //
-     SetTabSheetWithForm(aTabSheet, NameForm);
-     //
-     PageControl.ActivePage := aTabSheet;
+     TControllerTabFormFactory.New.Default.ShowForm(TControllerTabFormFactory.New.Default.CreateTab(TAction(Sender), PageControl), 'FormCustomer');
      //
      TAction(Sender).Enabled := True;
 end;
 
-procedure TfrmMain.SetTabSheetWithForm(aTabSheet: TTabSheet; NameForm: String);
-var
-     NewForm: TFormClass;
-     aForm: TForm;
+procedure TFormMain.ActionOrderExecute(Sender: TObject);
 begin
-     if (aTabSheet.Hint = '') and (NameForm <> '') then
-     begin
-          NewForm := TFormClass(FindClass('T' + NameForm));
-          //
-          aForm := NewForm.Create(Self);
-          aForm.Parent := aTabSheet;
-          aForm.BorderStyle := bsNone;
-          aForm.Align := alClient;
-          aForm.Visible := True;
-          //
-          aTabSheet.Hint := NameForm;
-     end;
+     TAction(Sender).Enabled := False;
+     //
+     TControllerTabFormFactory.New.Default.ShowForm(TControllerTabFormFactory.New.Default.CreateTab(TAction(Sender), PageControl), 'FormOrder');
+     //
+     TAction(Sender).Enabled := True;
 end;
 
-procedure TfrmMain.ActionCustomerExecute(Sender: TObject);
+procedure TFormMain.ActionProductExecute(Sender: TObject);
 begin
-     SetTabSheet(Sender, 'frmCustomer');
+     TAction(Sender).Enabled := False;
+     //
+     TControllerTabFormFactory.New.Default.ShowForm(TControllerTabFormFactory.New.Default.CreateTab(TAction(Sender), PageControl), 'FormProduct');
+     //
+     TAction(Sender).Enabled := True;
 end;
 
-procedure TfrmMain.ActionOrderExecute(Sender: TObject);
+procedure TFormMain.ActionTypePaymentExecute(Sender: TObject);
 begin
-     SetTabSheet(Sender, '');
+     TAction(Sender).Enabled := False;
+     //
+     TControllerTabFormFactory.New.Default.ShowForm(TControllerTabFormFactory.New.Default.CreateTab(TAction(Sender), PageControl), 'FormTypePayment');
+     //
+     TAction(Sender).Enabled := True;
 end;
 
-procedure TfrmMain.ActionProductExecute(Sender: TObject);
+procedure TFormMain.ApplicationEventsException(Sender: TObject; E: Exception);
 begin
-     SetTabSheet(Sender, 'frmProduct');
+     TControllerSecurityFactory.New.Default.AddLog(E.Message);
 end;
 
-procedure TfrmMain.ActionTypePaymentExecute(Sender: TObject);
-begin
-     SetTabSheet(Sender, 'frmTypePayment');
-end;
-
-procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFormMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
      if (MessageDlg('Do you really want to close?', mtConfirmation, [mbYes, mbNo], 0) = mrYES) then
           Action := caFree
@@ -133,24 +110,26 @@ begin
           Action := caNone;
 end;
 
-procedure TfrmMain.FormCreate(Sender: TObject);
+procedure TFormMain.FormCreate(Sender: TObject);
 begin
+     SetWebPage(TControllerAppInfoFactory.New.Default.LegalTrademarks);
+     //
      SetConfig;
 end;
 
-procedure TfrmMain.FormResize(Sender: TObject);
+procedure TFormMain.FormResize(Sender: TObject);
 begin
      StatusBar.Panels[3].Width := Width - (StatusBar.Panels[0].Width + StatusBar.Panels[1].Width + StatusBar.Panels[2].Width);
 end;
 
-procedure TfrmMain.FormShow(Sender: TObject);
+procedure TFormMain.FormShow(Sender: TObject);
 begin
      SetTitle;
      //
      SetStatus;
 end;
 
-procedure TfrmMain.SetStatus;
+procedure TFormMain.SetStatus;
 begin
      StatusBar.Panels[0].Text := 'Computer: ' + TControllerWinInfoFactory.New.Default.ComputerName;
      StatusBar.Panels[1].Text := 'User: ' + TControllerWinInfoFactory.New.Default.UserName;
@@ -158,14 +137,19 @@ begin
      StatusBar.Panels[3].Text := 'Welcome to ' + Application.Title;
 end;
 
-procedure TfrmMain.SetTitle;
+procedure TFormMain.SetTitle;
 begin
      Caption := TControllerAppInfoFactory.New.Default.CompanyName + ' - ' + Application.Title;
      //
      Ribbon.Caption := Caption;
 end;
 
-procedure TfrmMain.SetConfig;
+procedure TFormMain.SetWebPage(WebAddress: String);
+begin
+     WebBrowser.Navigate(WebAddress);
+end;
+
+procedure TFormMain.SetConfig;
 begin
      FServerName := TControllerIniFileFactory.New.Default.InputKey('Server', 'ServerName', '<Server Name>', False);
      FDatabaseName := TControllerIniFileFactory.New.Default.InputKey('Server', 'DatabaseName', '<Database Name>', False);
