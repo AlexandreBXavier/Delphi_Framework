@@ -12,6 +12,9 @@ object FormCustomer: TFormCustomer
   Font.Style = []
   OldCreateOrder = True
   OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object DBNavigator: TDBNavigator
@@ -51,6 +54,10 @@ object FormCustomer: TFormCustomer
     object TabInfo: TTabSheet
       Caption = 'Details of Record'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
   object DataSource: TDataSource

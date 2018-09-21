@@ -15,17 +15,7 @@ uses
   Invoice.View.TypePayment in 'View\Invoice.View.TypePayment.pas' {FormTypePayment},
   Invoice.View.Product in 'View\Invoice.View.Product.pas' {FormProduct},
   Invoice.View.Order in 'View\Invoice.View.Order.pas' {FormOrder},
-  Invoice.Model.Product in 'Model\Entity\Invoice.Model.Product.pas',
-  Invoice.Model.Customer in 'Model\Entity\Invoice.Model.Customer.pas',
-  Invoice.Model.OrderPayment in 'Model\Entity\Invoice.Model.OrderPayment.pas',
-  Invoice.Model.Order in 'Model\Entity\Invoice.Model.Order.pas',
-  Invoice.Model.OrderProduct in 'Model\Entity\Invoice.Model.OrderProduct.pas',
-  Invoice.Model.TypePayment in 'Model\Entity\Invoice.Model.TypePayment.pas',
-  Invoice.Model.Connections.Factory.Connection in 'Model\Connections\Invoice.Model.Connections.Factory.Connection.pas',
-  Invoice.Model.Connections.Factory.DataSet in 'Model\Connections\Invoice.Model.Connections.Factory.DataSet.pas',
-  Invoice.Model.Connections.Interfaces in 'Model\Connections\Invoice.Model.Connections.Interfaces.pas',
-  Invoice.Model.Connections.ConnectionFiredac in 'Model\Connections\Firedac\Invoice.Model.Connections.ConnectionFiredac.pas',
-  Invoice.Model.Connections.TableFiredac in 'Model\Connections\Firedac\Invoice.Model.Connections.TableFiredac.pas',
+  Invoice.Controller.DataModule in 'Controller\Invoice.Controller.DataModule.pas' {DataModuleLocal: TDataModule},
   Invoice.Controller.Interfaces in 'Controller\Invoice.Controller.Interfaces.pas',
   Invoice.Controller.AppInfo.Default in 'Controller\Invoice.Controller.AppInfo.Default.pas',
   Invoice.Controller.AppInfo.Factory in 'Controller\Invoice.Controller.AppInfo.Factory.pas',
@@ -36,7 +26,15 @@ uses
   Invoice.Controller.Security.Default in 'Controller\Invoice.Controller.Security.Default.pas',
   Invoice.Controller.TabForm.Default in 'Controller\Invoice.Controller.TabForm.Default.pas',
   Invoice.Controller.TabForm.Factory in 'Controller\Invoice.Controller.TabForm.Factory.pas',
-  Invoice.Controller.Security.Factory in 'Controller\Invoice.Controller.Security.Factory.pas';
+  Invoice.Controller.Security.Factory in 'Controller\Invoice.Controller.Security.Factory.pas',
+  Invoice.Controller.Query.Factory in 'Controller\Invoice.Controller.Query.Factory.pas',
+  Invoice.Controller.Connection.Factory in 'Controller\Invoice.Controller.Connection.Factory.pas',
+  Invoice.Model.Interfaces in 'Model\Invoice.Model.Interfaces.pas',
+  Invoice.Model.Connection.Firedac in 'Model\Connections\Firedac\Invoice.Model.Connection.Firedac.pas',
+  Invoice.Model.Query.Firedac in 'Model\Connections\Firedac\Invoice.Model.Query.Firedac.pas',
+  Invoice.Model.Entity.Product in 'Model\Entity\Invoice.Model.Entity.Product.pas',
+  Invoice.Model.Entity.TypePayment in 'Model\Entity\Invoice.Model.Entity.TypePayment.pas',
+  Invoice.Model.Entity.Customer in 'Model\Entity\Invoice.Model.Entity.Customer.pas';
 
 {$R *.res}
 
@@ -52,12 +50,15 @@ begin
           Application.Initialize;
           Application.MainFormOnTaskbar := True;
           Application.Title := 'Invoice Software ®';
+          ReportMemoryLeaksOnShutdown := True;
           // Show Splash Screen...
           try
                FormSplashScreen := TFormSplashScreen.Create(Application);
           finally
                FormSplashScreen.ShowModal;
           end;
+          // Create Data Module...
+          Application.CreateForm(TDataModuleLocal, DataModuleLocal);
           // Show Login Screen...
           try
                FormLogin := TFormLogin.Create(Application);

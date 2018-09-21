@@ -7,7 +7,7 @@ uses
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList, Vcl.Menus, System.UITypes,
      System.ImageList, Vcl.ImgList, Vcl.ComCtrls, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
      Vcl.ToolWin, Vcl.ActnCtrls, Vcl.Ribbon, Vcl.RibbonLunaStyleActnCtrls, Vcl.RibbonSilverStyleActnCtrls,
-     Vcl.OleCtrls, SHDocVw, Vcl.AppEvnts;
+     Vcl.OleCtrls, SHDocVw, Data.DB, Vcl.StdCtrls, Vcl.Buttons;
 
 type
      TFormMain = class(TForm)
@@ -17,17 +17,16 @@ type
           RibbonGroupProduct: TRibbonGroup;
           ActionManager: TActionManager;
           ActionProduct: TAction;
-          ImageList32_E: TImageList;
-          ImageList32_D: TImageList;
           ActionCustomer: TAction;
           ActionOrder: TAction;
           ActionTypePayment: TAction;
           RibbonGroup1: TRibbonGroup;
           PageControl: TPageControl;
           TabWelcome: TTabSheet;
-          ImageListTabs: TImageList;
           WebBrowser: TWebBrowser;
-          ApplicationEvents: TApplicationEvents;
+          ActionCloseTabSheet: TAction;
+          PopupMenu: TPopupMenu;
+          CloseTab: TMenuItem;
           procedure FormClose(Sender: TObject; var Action: TCloseAction);
           procedure FormShow(Sender: TObject);
           procedure FormResize(Sender: TObject);
@@ -36,18 +35,12 @@ type
           procedure ActionCustomerExecute(Sender: TObject);
           procedure ActionOrderExecute(Sender: TObject);
           procedure ActionTypePaymentExecute(Sender: TObject);
-          procedure ApplicationEventsException(Sender: TObject; E: Exception);
+          procedure ActionCloseTabSheetExecute(Sender: TObject);
      private
           { Private declarations }
-          FServerName: String;
-          FDatabaseName: String;
-          FUserName: String;
-          FUserPassword: String;
-          //
           procedure SetTitle;
           procedure SetStatus;
           procedure SetWebPage(WebAddress: String);
-          procedure SetConfig;
      public
           { Public declarations }
      end;
@@ -59,7 +52,13 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.TabForm.Factory, Invoice.Controller.AppInfo.Factory, Invoice.Controller.WinInfo.Factory, Invoice.Controller.IniFile.Factory, Invoice.Controller.Security.Factory;
+uses Invoice.Controller.DataModule, Invoice.Controller.TabForm.Factory, Invoice.Controller.AppInfo.Factory, Invoice.Controller.WinInfo.Factory, Invoice.Controller.IniFile.Factory, Invoice.Controller.Security.Factory, Invoice.Controller.Connection.Factory;
+
+procedure TFormMain.ActionCloseTabSheetExecute(Sender: TObject);
+begin
+     if (PageControl.ActivePage <> nil) then
+          PageControl.ActivePage.Free;
+end;
 
 procedure TFormMain.ActionCustomerExecute(Sender: TObject);
 begin
@@ -97,15 +96,14 @@ begin
      TAction(Sender).Enabled := True;
 end;
 
-procedure TFormMain.ApplicationEventsException(Sender: TObject; E: Exception);
-begin
-     TControllerSecurityFactory.New.Default.AddLog(E.Message);
-end;
-
 procedure TFormMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
      if (MessageDlg('Do you really want to close?', mtConfirmation, [mbYes, mbNo], 0) = mrYES) then
-          Action := caFree
+     begin
+          while (PageControl.ActivePage <> nil) do ActionCloseTabSheetExecute(Sender);
+          //
+          Action := caFree;
+     end
      else
           Action := caNone;
 end;
@@ -114,7 +112,8 @@ procedure TFormMain.FormCreate(Sender: TObject);
 begin
      SetWebPage(TControllerAppInfoFactory.New.Default.LegalTrademarks);
      //
-     SetConfig;
+     if not DataModuleLocal.Connected then
+          Application.Terminate;
 end;
 
 procedure TFormMain.FormResize(Sender: TObject);
@@ -132,12 +131,14 @@ end;
 procedure TFormMain.SetStatus;
 begin
      StatusBar.Panels[0].Text := 'Computer: ' + TControllerWinInfoFactory.New.Default.ComputerName;
-     StatusBar.Panels[1].Text := 'User: ' + TControllerWinInfoFactory.New.Default.UserName;
+     StatusBar.Panels[1].Text := 'User: ' + DataModuleLocal.GetUsername;
      StatusBar.Panels[2].Text := 'Version ' + TControllerAppInfoFactory.New.Default.FileVersion;
      StatusBar.Panels[3].Text := 'Welcome to ' + Application.Title;
 end;
 
 procedure TFormMain.SetTitle;
+var
+     StatusDB: String;
 begin
      Caption := TControllerAppInfoFactory.New.Default.CompanyName + ' - ' + Application.Title;
      //
@@ -147,14 +148,6 @@ end;
 procedure TFormMain.SetWebPage(WebAddress: String);
 begin
      WebBrowser.Navigate(WebAddress);
-end;
-
-procedure TFormMain.SetConfig;
-begin
-     FServerName := TControllerIniFileFactory.New.Default.InputKey('Server', 'ServerName', '<Server Name>', False);
-     FDatabaseName := TControllerIniFileFactory.New.Default.InputKey('Server', 'DatabaseName', '<Database Name>', False);
-     FUserName := TControllerIniFileFactory.New.Default.InputKey('Server', 'UserName', '<User Name>', False);
-     FUserPassword := TControllerIniFileFactory.New.Default.InputKey('Server', 'UserPassword', '<User Password>', True);
 end;
 
 end.

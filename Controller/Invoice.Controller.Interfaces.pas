@@ -72,8 +72,9 @@ type
           function Login(aUser, aPasswood: String): Boolean;
           function ShowLog: TStrings;
           function AddLog(aLog: String): iControllerSecurityDefault;
+          function EnCrypt(InString: String): String;
+          function DeCrypt(InString: String): String;
      end;
-
 
 implementation
 

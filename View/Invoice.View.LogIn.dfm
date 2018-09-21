@@ -18,6 +18,7 @@ object FormLogin: TFormLogin
   Position = poScreenCenter
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object LabelUser: TLabel

@@ -13,6 +13,9 @@ object FormTypePayment: TFormTypePayment
   Font.Style = []
   OldCreateOrder = True
   OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object DBNavigator: TDBNavigator
@@ -23,8 +26,6 @@ object FormTypePayment: TFormTypePayment
     DataSource = DataSource
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 357
-    ExplicitWidth = 662
   end
   object PageControl: TPageControl
     Left = 0
@@ -34,12 +35,8 @@ object FormTypePayment: TFormTypePayment
     ActivePage = TabList
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 662
-    ExplicitHeight = 357
     object TabList: TTabSheet
       Caption = 'List of Records'
-      ExplicitWidth = 654
-      ExplicitHeight = 329
       object DBGridRecords: TDBGrid
         Left = 0
         Top = 0
@@ -58,6 +55,10 @@ object FormTypePayment: TFormTypePayment
     object TabInfo: TTabSheet
       Caption = 'Details of Record'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
   object DataSource: TDataSource

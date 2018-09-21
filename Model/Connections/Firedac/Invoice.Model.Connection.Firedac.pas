@@ -1,15 +1,15 @@
-unit Invoice.Model.Connections.ConnectionFiredac;
+unit Invoice.Model.Connection.Firedac;
 
 
 interface
 
-uses System.Classes, Data.DB, FireDAC.UI.Intf, FireDAC.VCLUI.Error,
+uses Invoice.Model.Interfaces, System.Classes, Data.DB, FireDAC.UI.Intf, FireDAC.VCLUI.Error,
      FireDAC.Stan.Error, FireDAC.VCLUI.Wait, FireDAC.Phys.MSSQLDef, FireDAC.Phys,
      FireDAC.Phys.ODBCBase, FireDAC.Phys.MSSQL, FireDAC.Comp.UI, FireDAC.Stan.Intf,
      FireDAC.Stan.Option, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
-     FireDAC.Stan.Async, FireDAC.Comp.Client, Invoice.Model.Connections.Interfaces;
+     FireDAC.Stan.Async, FireDAC.Comp.Client;
 
-Type
+type
      TModelConnectionFiredac = class(TInterfacedObject, iModelConnection, iModelConnectionParametros)
      private
           FConnection: TFDConnection;
@@ -26,7 +26,6 @@ Type
           constructor Create;
           destructor Destroy; override;
           class function New: iModelConnection;
-          function EndConnection: TComponent;
           function Database(Value: String): iModelConnectionParametros;
           function UserName(Value: String): iModelConnectionParametros;
           function Password(Value: String): iModelConnectionParametros;
@@ -35,22 +34,15 @@ Type
           function Porta(Value: Integer): iModelConnectionParametros;
           function EndParametros: iModelConnection;
           function Parametros: iModelConnectionParametros;
-          function Conectar: iModelConnection;
+          function Connection: TCustomConnection;
      end;
 
 implementation
 
 uses
-     System.SysUtils;
+     System.SysUtils, Vcl.Dialogs;
 
 { TModelConnectionFiredac }
-
-function TModelConnectionFiredac.Conectar: iModelConnection;
-begin
-     Result := Self;
-     LerParametros;
-     FConnection.Connected := true;
-end;
 
 constructor TModelConnectionFiredac.Create;
 begin
@@ -59,29 +51,43 @@ begin
      FDPhysMSSQLDriverLink1 := TFDPhysMSSQLDriverLink.Create(nil);
 end;
 
-function TModelConnectionFiredac.Database(Value: String): iModelConnectionParametros;
-begin
-     Result := Self;
-     FDatabase := Value;
-end;
-
 destructor TModelConnectionFiredac.Destroy;
 begin
+     FConnection.Close;
+     //
      FDGUIxWaitCursor1.Free;
      FDPhysMSSQLDriverLink1.Free;
      FConnection.Free;
+     //
      inherited;
+end;
+
+class function TModelConnectionFiredac.New: iModelConnection;
+begin
+     Result := Self.Create;
+end;
+
+function TModelConnectionFiredac.Connection: TCustomConnection;
+begin
+     Result := TCustomConnection(FConnection);
+     //
+     LerParametros;
+     //
+     FConnection.Open;
 end;
 
 function TModelConnectionFiredac.DriverID(Value: String): iModelConnectionParametros;
 begin
      Result := Self;
+     //
      FDriverID := Value;
 end;
 
-function TModelConnectionFiredac.EndConnection: TComponent;
+function TModelConnectionFiredac.Database(Value: String): iModelConnectionParametros;
 begin
-     Result := FConnection;
+     Result := Self;
+     //
+     FDatabase := Value;
 end;
 
 function TModelConnectionFiredac.EndParametros: iModelConnection;
@@ -91,17 +97,12 @@ end;
 
 procedure TModelConnectionFiredac.LerParametros;
 begin
+     FConnection.Params.Clear;
+     FConnection.Params.DriverID := FDriverID;
      FConnection.Params.Database := FDatabase;
      FConnection.Params.UserName := FUserName;
      FConnection.Params.Password := FPassword;
-     FConnection.Params.DriverID := FDriverID;
      FConnection.Params.Add('Server=' + FServer);
-     FConnection.Params.Add('Port=' + IntToStr(FPorta));
-end;
-
-class function TModelConnectionFiredac.New: iModelConnection;
-begin
-     Result := Self.Create;
 end;
 
 function TModelConnectionFiredac.Parametros: iModelConnectionParametros;
@@ -112,24 +113,28 @@ end;
 function TModelConnectionFiredac.Password(Value: String): iModelConnectionParametros;
 begin
      Result := Self;
+     //
      FPassword := Value;
 end;
 
 function TModelConnectionFiredac.Porta(Value: Integer): iModelConnectionParametros;
 begin
      Result := Self;
+     //
      FPorta := Value;
 end;
 
 function TModelConnectionFiredac.Server(Value: String): iModelConnectionParametros;
 begin
      Result := Self;
+     //
      FServer := Value;
 end;
 
 function TModelConnectionFiredac.UserName(Value: String): iModelConnectionParametros;
 begin
      Result := Self;
+     //
      FUserName := Value;
 end;
 

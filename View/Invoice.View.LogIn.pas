@@ -5,24 +5,25 @@ interface
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage;
+     Vcl.Imaging.pngimage;
 
 type
      TFormLogin = class(TForm)
-    btnCancel: TButton;
-    btnLogin: TButton;
-    EditPassword: TEdit;
-    EditUser: TEdit;
-    LabelUser: TLabel;
-    LabelPassword: TLabel;
-    imageBackground: TImage;
-    LabelSoftware: TLabel;
-    LabelDeveloper: TLabel;
-    LabelVersion: TLabel;
+          btnCancel: TButton;
+          btnLogin: TButton;
+          EditPassword: TEdit;
+          EditUser: TEdit;
+          LabelUser: TLabel;
+          LabelPassword: TLabel;
+          imageBackground: TImage;
+          LabelSoftware: TLabel;
+          LabelDeveloper: TLabel;
+          LabelVersion: TLabel;
           procedure btnLoginClick(Sender: TObject);
           procedure btnCancelClick(Sender: TObject);
           procedure FormCreate(Sender: TObject);
           procedure FormClose(Sender: TObject; var Action: TCloseAction);
+          procedure FormShow(Sender: TObject);
      private
           { Private declarations }
           FLogin: Boolean;
@@ -40,7 +41,7 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.AppInfo.Factory, Invoice.Controller.Security.Factory;
+uses Invoice.Controller.DataModule, Invoice.Controller.AppInfo.Factory, Invoice.Controller.Security.Factory, Invoice.Controller.WinInfo.Factory;
 
 procedure TFormLogin.SetLabel;
 begin
@@ -58,15 +59,23 @@ procedure TFormLogin.btnLoginClick(Sender: TObject);
 begin
      if (EditUser.Text <> '') and (EditPassword.Text <> '') then
      begin
-          FLogin := TControllerSecurityFactory.New.Default.Login(EditUser.Text, EditPassword.Text);
+          FLogin := TControllerSecurityFactory.New.Default.LogIn(EditUser.Text, EditPassword.Text);
           //
           if FLogin then
-               Close
+          begin
+               DataModuleLocal.SetUsername(EditUser.Text);
+               //
+               Close;
+          end
           else
-               raise Exception.Create('Invalid user or password.');
+          begin
+               EditPassword.Text := '';
+               //
+               MessageDlg('Invalid user or password.', mtError, [mbOK], 0);
+          end;
      end
      else
-          raise Exception.Create('Enter the username and password.');
+          MessageDlg('Enter the username and password.', mtError, [mbOK], 0);
 end;
 
 procedure TFormLogin.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -84,6 +93,13 @@ begin
      SetTitle;
      //
      SetLabel;
+end;
+
+procedure TFormLogin.FormShow(Sender: TObject);
+begin
+     EditUser.Text := TControllerWinInfoFactory.New.Default.UserName;
+     //
+     EditPassword.Text := '';
 end;
 
 procedure TFormLogin.SetTitle;

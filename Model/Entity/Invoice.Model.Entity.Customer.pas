@@ -1,0 +1,49 @@
+unit Invoice.Model.Entity.Customer;
+
+interface
+
+uses System.SysUtils, Data.DB, Invoice.Model.Interfaces, Invoice.Controller.Query.Factory;
+
+type
+     TModelEntityCustomer = class(TInterfacedObject, iEntity)
+     private
+          FQuery: iQuery;
+     public
+          constructor Create(Connection: iModelConnection);
+          destructor Destroy; Override;
+          class function New(Connection: iModelConnection): iEntity;
+          function List(Value: TDataSource): iEntity;
+     end;
+
+implementation
+
+
+{ TModelEntityCustomer }
+
+constructor TModelEntityCustomer.Create(Connection: iModelConnection);
+begin
+     FQuery := TControllerQueryFactory.New.Query(Connection)
+end;
+
+destructor TModelEntityCustomer.Destroy;
+begin
+     FreeAndNil(FQuery);
+     //
+     inherited;
+end;
+
+function TModelEntityCustomer.List(Value: TDataSource): iEntity;
+begin
+     Result := Self;
+     //
+     FQuery.SQL('SELECT * FROM Customer');
+     //
+     Value.DataSet := FQuery.Dataset;
+end;
+
+class function TModelEntityCustomer.New(Connection: iModelConnection): iEntity;
+begin
+     Result := Self.Create(Connection);
+end;
+
+end.
