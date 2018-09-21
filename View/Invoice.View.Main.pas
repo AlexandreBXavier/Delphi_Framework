@@ -56,8 +56,7 @@ uses Invoice.Controller.DataModule, Invoice.Controller.TabForm.Factory, Invoice.
 
 procedure TFormMain.ActionCloseTabSheetExecute(Sender: TObject);
 begin
-     if (PageControl.ActivePage <> nil) then
-          PageControl.ActivePage.Free;
+     if (PageControl.ActivePage <> nil) then PageControl.ActivePage.Free;
 end;
 
 procedure TFormMain.ActionCustomerExecute(Sender: TObject);
@@ -99,11 +98,7 @@ end;
 procedure TFormMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
      if (MessageDlg('Do you really want to close?', mtConfirmation, [mbYes, mbNo], 0) = mrYES) then
-     begin
-          while (PageControl.ActivePage <> nil) do ActionCloseTabSheetExecute(Sender);
-          //
-          Action := caFree;
-     end
+          Action := caFree
      else
           Action := caNone;
 end;

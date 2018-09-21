@@ -16,8 +16,7 @@ type
 
 implementation
 
-uses
-  Vcl.Controls;
+uses Vcl.Controls;
 
 { TControllerTabForm }
 

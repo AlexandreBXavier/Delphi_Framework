@@ -1,27 +1,19 @@
 unit Invoice.View.TypePayment;
-
+
 interface
 
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-     Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ExtCtrls,
-     Vcl.DBCtrls, Invoice.Model.Interfaces;
+     Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
+     Vcl.ComCtrls, Invoice.Model.Interfaces, Invoice.View.Template.Register;
 
 type
-     TFormTypePayment = class(TForm)
-          DBNavigator: TDBNavigator;
-          PageControl: TPageControl;
-          TabList: TTabSheet;
-          TabInfo: TTabSheet;
-          DataSource: TDataSource;
-          DBGridRecords: TDBGrid;
-          procedure FormClose(Sender: TObject; var Action: TCloseAction);
+     TFormTypePayment = class(TFormTemplateRegister)
           procedure FormCreate(Sender: TObject);
-          procedure FormDestroy(Sender: TObject);
           procedure FormShow(Sender: TObject);
      private
           { Private declarations }
-          FTypePayment: iEntity;
+          FEntidade: iEntity;
      public
           { Public declarations }
      end;
@@ -33,32 +25,22 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.DataModule, Invoice.Model.Entity.TypePayment, Invoice.Controller.Connection.Factory;
-
-procedure TFormTypePayment.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-     Action := caFree;
-end;
+uses Invoice.Controller.DataModule, Invoice.Model.Entity.TypePayment;
 
 procedure TFormTypePayment.FormCreate(Sender: TObject);
 begin
      try
-          FTypePayment := TModelEntityTypePayment.New(DataModuleLocal.GetConnection);
+          FEntidade := TModelEntityTypePayment.New(DataModuleLocal.GetConnection);
      except
           on E: Exception do
                raise Exception.Create(E.Message);
      end;
 end;
 
-procedure TFormTypePayment.FormDestroy(Sender: TObject);
-begin
-     FreeAndNil(FTypePayment);
-end;
-
 procedure TFormTypePayment.FormShow(Sender: TObject);
 begin
      try
-          FTypePayment.List(DataSource);
+          FEntidade.List(DataSource);
      except
           on E: Exception do
                raise Exception.Create(E.Message);
@@ -74,4 +56,3 @@ Finalization
 UnRegisterClass(TFormTypePayment);
 
 end.
-

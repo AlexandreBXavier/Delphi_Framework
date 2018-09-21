@@ -12,11 +12,10 @@ type
           constructor Create(Connection: iModelConnection);
           destructor Destroy; Override;
           class function New(Connection: iModelConnection): iEntity;
-          function List(Value: TDataSource): iEntity;
+          function List(var Value: TDataSource): iEntity;
      end;
 
 implementation
-
 
 { TModelEntityProduct }
 
@@ -27,16 +26,16 @@ end;
 
 destructor TModelEntityProduct.Destroy;
 begin
-     FreeAndNil(FQuery);
+     FQuery.Close;
      //
      inherited;
 end;
 
-function TModelEntityProduct.List(Value: TDataSource): iEntity;
+function TModelEntityProduct.List(var Value: TDataSource): iEntity;
 begin
      Result := Self;
      //
-     FQuery.SQL('SELECT * FROM Product');
+     FQuery.SQL('SELECT * FROM Product').Open;
      //
      Value.DataSet := FQuery.Dataset;
 end;

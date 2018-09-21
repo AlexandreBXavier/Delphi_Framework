@@ -9,12 +9,13 @@ uses
   System.SysUtils,
   Winapi.Windows,
   Invoice.View.SplashScreen in 'View\Invoice.View.SplashScreen.pas' {FormSplashScreen},
+  Invoice.View.Template.Register in 'View\Template\Invoice.View.Template.Register.pas' {FormTemplateRegister},
   Invoice.View.LogIn in 'View\Invoice.View.LogIn.pas' {FormLogin},
   Invoice.View.Main in 'View\Invoice.View.Main.pas' {FormMain},
+  Invoice.View.Order in 'View\Invoice.View.Order.pas' {FormOrder},
+  Invoice.View.Product in 'View\Invoice.View.Product.pas' {FormProduct},
   Invoice.View.Customer in 'View\Invoice.View.Customer.pas' {FormCustomer},
   Invoice.View.TypePayment in 'View\Invoice.View.TypePayment.pas' {FormTypePayment},
-  Invoice.View.Product in 'View\Invoice.View.Product.pas' {FormProduct},
-  Invoice.View.Order in 'View\Invoice.View.Order.pas' {FormOrder},
   Invoice.Controller.DataModule in 'Controller\Invoice.Controller.DataModule.pas' {DataModuleLocal: TDataModule},
   Invoice.Controller.Interfaces in 'Controller\Invoice.Controller.Interfaces.pas',
   Invoice.Controller.AppInfo.Default in 'Controller\Invoice.Controller.AppInfo.Default.pas',
@@ -40,7 +41,6 @@ uses
 
 var
      SystemName: PChar;
-
 begin
      SystemName := 'Invoice Software ®';
      CreateMutex(Nil, False, SystemName);
@@ -74,5 +74,4 @@ begin
      end
      else // Display another executable...
           SendMessage(HWND_BROADCAST, RegisterWindowMessage(SystemName), 0, 0);
-
 end.

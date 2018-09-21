@@ -45,11 +45,6 @@ var
      Value: pchar;
      Tmp1, Tmp2: Dword;
 begin
-     {
-       'CompanyName', 'FileDescription', 'FileVersion', 'InternalName',
-       'LegalCopyright', 'LegalTradeMarks', 'OriginalFilename',
-       'ProductName', 'ProductVersion', 'Comments'
-     }
      ExeApp := Application.ExeName;
      SizeOf := GetFileVersionInfoSize(pchar(ExeApp), Tmp1);
      result := '';

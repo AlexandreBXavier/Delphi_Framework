@@ -13,11 +13,14 @@ uses Invoice.Model.Interfaces, System.Classes, Data.DB, System.SysUtils,
 type
      TModelQueryFiredac = class(TInterfacedObject, iQuery)
      private
+          FConnection: iModelConnection;
           FQuery: TFDQuery;
      public
           constructor Create(aConnection: iModelConnection);
           destructor Destroy; override;
           class function New(aConnection: iModelConnection): iQuery;
+          procedure Open;
+          procedure Close;
           function SQL(Value: String): iQuery;
           function DataSet: TDataSet;
      end;
@@ -30,12 +33,14 @@ uses Invoice.Model.Connection.Firedac;
 
 constructor TModelQueryFiredac.Create(aConnection: iModelConnection);
 begin
-     if not Assigned(aConnection) then
+     FConnection := aConnection;
+     //
+     if not Assigned(FConnection.Connection) then
           raise Exception.Create('Connection is not valid.');
      //
      FQuery := TFDQuery.Create(nil);
      //
-     FQuery.Connection := TFDConnection(aConnection.Connection);
+     FQuery.Connection := TFDConnection(FConnection.Connection);
 end;
 
 function TModelQueryFiredac.DataSet: TDataSet;
@@ -59,9 +64,18 @@ function TModelQueryFiredac.SQL(Value: String): iQuery;
 begin
      Result := Self;
      //
+     FQuery.SQL.Clear;
      FQuery.SQL.Add(Value);
-     //
+end;
+
+procedure TModelQueryFiredac.Open;
+begin
      FQuery.Active := True;
+end;
+
+procedure TModelQueryFiredac.Close;
+begin
+     FQuery.Active := False;
 end;
 
 end.

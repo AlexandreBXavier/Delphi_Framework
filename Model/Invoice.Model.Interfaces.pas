@@ -33,13 +33,15 @@ type
 
      iQuery = interface
           ['{6C0CDB32-885F-4DC6-B4DC-041B1D4F9173}']
+          procedure Open;
+          procedure Close;
           function SQL(Value: String): iQuery;
           function DataSet: TDataSet;
      end;
 
      iEntity = interface
           ['{976C5307-B7E8-4C8B-B283-D24DB4ED11F0}']
-          function List(Value: TDataSource): iEntity;
+          function List(var Value: TDataSource): iEntity;
      end;
 
      iModelQueryFactory = interface
