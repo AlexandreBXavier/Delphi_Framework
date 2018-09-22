@@ -30,7 +30,6 @@ type
           function ConnectionFiredac : iModelConnection;
      end;
 
-
      iQuery = interface
           ['{6C0CDB32-885F-4DC6-B4DC-041B1D4F9173}']
           procedure Open;
@@ -39,10 +38,20 @@ type
           function DataSet: TDataSet;
      end;
 
+     iTable = interface
+          ['{33CD1DDC-EB9F-47F8-B4D4-A0D0401A71D4}']
+          function Open(aTable: String): TDataSet;
+     end;
+
      iEntity = interface
           ['{976C5307-B7E8-4C8B-B283-D24DB4ED11F0}']
           function List: iEntity;
           function DataSet: TDataSet;
+     end;
+
+     iModelTableFactory = interface
+          ['{5C7FAC45-B671-4897-B18F-CCAE970B8885}']
+          function Table(Connection: iModelConnection): iTable;
      end;
 
      iModelQueryFactory = interface
