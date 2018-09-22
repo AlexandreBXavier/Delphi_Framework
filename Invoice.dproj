@@ -95,8 +95,8 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>Invoice.ico</Icon_MainIcon>
-        <VerInfo_Build>145</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.145;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=http://www.embarcadero.com;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
+        <VerInfo_Build>162</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.162;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=http://www.embarcadero.com;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -143,6 +143,9 @@
         <DCCReference Include="View\Invoice.View.TypePayment.pas">
             <Form>FormTypePayment</Form>
         </DCCReference>
+        <DCCReference Include="View\Invoice.View.User.pas">
+            <Form>FormUser</Form>
+        </DCCReference>
         <DCCReference Include="Controller\Invoice.Controller.DataModule.pas">
             <Form>DataModuleLocal</Form>
             <DesignClass>TDataModule</DesignClass>
@@ -166,6 +169,7 @@
         <DCCReference Include="Model\Entity\Invoice.Model.Entity.Product.pas"/>
         <DCCReference Include="Model\Entity\Invoice.Model.Entity.TypePayment.pas"/>
         <DCCReference Include="Model\Entity\Invoice.Model.Entity.Customer.pas"/>
+        <DCCReference Include="Model\Entity\Invoice.Model.Entity.User.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

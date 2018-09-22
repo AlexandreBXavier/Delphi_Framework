@@ -16,6 +16,7 @@ uses
   Invoice.View.Product in 'View\Invoice.View.Product.pas' {FormProduct},
   Invoice.View.Customer in 'View\Invoice.View.Customer.pas' {FormCustomer},
   Invoice.View.TypePayment in 'View\Invoice.View.TypePayment.pas' {FormTypePayment},
+  Invoice.View.User in 'View\Invoice.View.User.pas' {FormUser},
   Invoice.Controller.DataModule in 'Controller\Invoice.Controller.DataModule.pas' {DataModuleLocal: TDataModule},
   Invoice.Controller.Interfaces in 'Controller\Invoice.Controller.Interfaces.pas',
   Invoice.Controller.AppInfo.Default in 'Controller\Invoice.Controller.AppInfo.Default.pas',
@@ -35,7 +36,8 @@ uses
   Invoice.Model.Query.Firedac in 'Model\Connections\Firedac\Invoice.Model.Query.Firedac.pas',
   Invoice.Model.Entity.Product in 'Model\Entity\Invoice.Model.Entity.Product.pas',
   Invoice.Model.Entity.TypePayment in 'Model\Entity\Invoice.Model.Entity.TypePayment.pas',
-  Invoice.Model.Entity.Customer in 'Model\Entity\Invoice.Model.Entity.Customer.pas';
+  Invoice.Model.Entity.Customer in 'Model\Entity\Invoice.Model.Entity.Customer.pas',
+  Invoice.Model.Entity.User in 'Model\Entity\Invoice.Model.Entity.User.pas';
 
 {$R *.res}
 
@@ -57,6 +59,8 @@ begin
           finally
                FormSplashScreen.ShowModal;
           end;
+          //
+          Application.ProcessMessages;
           // Create Data Module...
           Application.CreateForm(TDataModuleLocal, DataModuleLocal);
           // Show Login Screen...

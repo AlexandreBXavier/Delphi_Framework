@@ -1,11 +1,11 @@
-unit Invoice.Model.Entity.Product;
+unit Invoice.Model.Entity.User;
 
 interface
 
 uses System.SysUtils, Data.DB, Invoice.Model.Interfaces, Invoice.Controller.Query.Factory;
 
 type
-     TModelEntityProduct = class(TInterfacedObject, iEntity)
+     TModelEntityUser = class(TInterfacedObject, iEntity)
      private
           FQuery: iQuery;
      public
@@ -18,33 +18,33 @@ type
 
 implementation
 
-{ TModelEntityProduct }
+{ TModelEntityUser }
 
-constructor TModelEntityProduct.Create(Connection: iModelConnection);
+constructor TModelEntityUser.Create(Connection: iModelConnection);
 begin
      FQuery := TControllerQueryFactory.New.Query(Connection)
 end;
 
-function TModelEntityProduct.DataSet: TDataSet;
+function TModelEntityUser.DataSet: TDataSet;
 begin
      Result := FQuery.Dataset;
 end;
 
-destructor TModelEntityProduct.Destroy;
+destructor TModelEntityUser.Destroy;
 begin
      FQuery.Close;
      //
      inherited;
 end;
 
-function TModelEntityProduct.List: iEntity;
+function TModelEntityUser.List: iEntity;
 begin
      Result := Self;
      //
-     FQuery.SQL('SELECT * FROM tbProduct').Open;
+     FQuery.SQL('SELECT * FROM tbUser').Open;
 end;
 
-class function TModelEntityProduct.New(Connection: iModelConnection): iEntity;
+class function TModelEntityUser.New(Connection: iModelConnection): iEntity;
 begin
      Result := Self.Create(Connection);
 end;

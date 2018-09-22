@@ -41,7 +41,8 @@ type
 
      iEntity = interface
           ['{976C5307-B7E8-4C8B-B283-D24DB4ED11F0}']
-          function List(var Value: TDataSource): iEntity;
+          function List: iEntity;
+          function DataSet: TDataSet;
      end;
 
      iModelQueryFactory = interface

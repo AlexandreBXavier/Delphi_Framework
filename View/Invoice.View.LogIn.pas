@@ -56,13 +56,18 @@ begin
 end;
 
 procedure TFormLogin.btnLoginClick(Sender: TObject);
+var
+     idUser: Integer;
 begin
      if (EditUser.Text <> '') and (EditPassword.Text <> '') then
      begin
-          FLogin := TControllerSecurityFactory.New.Default.LogIn(EditUser.Text, EditPassword.Text);
+          idUser := TControllerSecurityFactory.New.Default.LogIn(EditUser.Text, EditPassword.Text);
+          //
+          FLogin := (idUser > 0);
           //
           if FLogin then
           begin
+               DataModuleLocal.SetidUser(idUser);
                DataModuleLocal.SetUsername(EditUser.Text);
                //
                Close;

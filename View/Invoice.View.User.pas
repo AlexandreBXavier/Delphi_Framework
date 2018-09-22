@@ -1,14 +1,14 @@
-unit Invoice.View.Product;
+unit Invoice.View.User;
 
 interface
 
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-     Vcl.ComCtrls, Invoice.Model.Interfaces, Invoice.View.Template.Register;
+     Vcl.ComCtrls, Vcl.StdCtrls, Invoice.Model.Interfaces, Invoice.View.Template.Register;
 
 type
-     TFormProduct = class(TFormTemplateRegister)
+     TFormUser = class(TFormTemplateRegister)
           procedure FormCreate(Sender: TObject);
      private
           { Private declarations }
@@ -18,18 +18,18 @@ type
      end;
 
 var
-     FormProduct: TFormProduct;
+     FormUser: TFormUser;
 
 implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.DataModule, Invoice.Model.Entity.Product;
+uses Invoice.Controller.DataModule, Invoice.Model.Entity.User;
 
-procedure TFormProduct.FormCreate(Sender: TObject);
+procedure TFormUser.FormCreate(Sender: TObject);
 begin
      try
-          FEntity := TModelEntityProduct.New(DataModuleLocal.GetConnection);
+          FEntity := TModelEntityUser.New(DataModuleLocal.GetConnection);
           //
           FEntity.List;
           //
@@ -42,10 +42,10 @@ end;
 
 Initialization
 
-RegisterClass(TFormProduct);
+RegisterClass(TFormUser);
 
 Finalization
 
-UnRegisterClass(TFormProduct);
+UnRegisterClass(TFormUser);
 
 end.

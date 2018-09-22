@@ -12,7 +12,8 @@ type
           constructor Create(Connection: iModelConnection);
           destructor Destroy; Override;
           class function New(Connection: iModelConnection): iEntity;
-          function List(var Value: TDataSource): iEntity;
+          function List: iEntity;
+          function DataSet: TDataSet;
      end;
 
 implementation
@@ -25,6 +26,11 @@ begin
      FQuery := TControllerQueryFactory.New.Query(Connection)
 end;
 
+function TModelEntityCustomer.DataSet: TDataSet;
+begin
+     Result := FQuery.Dataset;
+end;
+
 destructor TModelEntityCustomer.Destroy;
 begin
      FQuery.Close;
@@ -32,13 +38,11 @@ begin
      inherited;
 end;
 
-function TModelEntityCustomer.List(var Value: TDataSource): iEntity;
+function TModelEntityCustomer.List: iEntity;
 begin
      Result := Self;
      //
-     FQuery.SQL('SELECT * FROM Customer').Open;;
-     //
-     Value.DataSet := FQuery.Dataset;
+     FQuery.SQL('SELECT * FROM tbCustomer').Open;
 end;
 
 class function TModelEntityCustomer.New(Connection: iModelConnection): iEntity;

@@ -73,13 +73,22 @@ object FormMain: TFormMain
         Caption = 'Group of Product'
         GroupIndex = 0
       end
-      object RibbonGroup1: TRibbonGroup
-        Left = 127
+      object RibbonGroupSales: TRibbonGroup
+        Left = 179
         Top = 3
         Width = 108
         Height = 86
         ActionManager = ActionManager
         Caption = 'Group of Sales'
+        GroupIndex = 2
+      end
+      object RibbonGroupUser: TRibbonGroup
+        Left = 127
+        Top = 3
+        Width = 50
+        Height = 86
+        ActionManager = ActionManager
+        Caption = 'Group of User'
         GroupIndex = 1
       end
     end
@@ -103,7 +112,7 @@ object FormMain: TFormMain
         Height = 419
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 420
+        ExplicitTop = -2
         ControlData = {
           4C000000E45200004E2B00000000000000000000000000000000000000000000
           000000004C000000000000000000000001000000E0D057007335CF11AE690800
@@ -145,11 +154,21 @@ object FormMain: TFormMain
             ImageIndex = 129
             CommandProperties.ButtonSize = bsLarge
           end>
-        ActionBar = RibbonGroup1
+        ActionBar = RibbonGroupSales
+      end
+      item
+        Items = <
+          item
+            Action = ActionUser
+            Caption = '&User'
+            ImageIndex = 1
+            CommandProperties.ButtonSize = bsLarge
+          end>
+        ActionBar = RibbonGroupUser
       end>
     DisabledImages = DataModuleLocal.ImageList32_D
     Images = DataModuleLocal.ImageList32_E
-    Left = 280
+    Left = 344
     Top = 64
     StyleName = 'Ribbon - Silver'
     object ActionProduct: TAction
@@ -171,6 +190,11 @@ object FormMain: TFormMain
       Caption = 'Type of Payments'
       ImageIndex = 129
       OnExecute = ActionTypePaymentExecute
+    end
+    object ActionUser: TAction
+      Caption = 'User'
+      ImageIndex = 1
+      OnExecute = ActionUserExecute
     end
     object ActionCloseTabSheet: TAction
       Caption = 'CloseTab'

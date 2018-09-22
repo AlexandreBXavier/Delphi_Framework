@@ -14,17 +14,19 @@ type
           StatusBar: TStatusBar;
           Ribbon: TRibbon;
           RibbonPageMain: TRibbonPage;
-          RibbonGroupProduct: TRibbonGroup;
           ActionManager: TActionManager;
           ActionProduct: TAction;
           ActionCustomer: TAction;
           ActionOrder: TAction;
           ActionTypePayment: TAction;
-          RibbonGroup1: TRibbonGroup;
+          ActionUser: TAction;
+          ActionCloseTabSheet: TAction;
+          RibbonGroupProduct: TRibbonGroup;
+          RibbonGroupSales: TRibbonGroup;
+          RibbonGroupUser: TRibbonGroup;
           PageControl: TPageControl;
           TabWelcome: TTabSheet;
           WebBrowser: TWebBrowser;
-          ActionCloseTabSheet: TAction;
           PopupMenu: TPopupMenu;
           CloseTab: TMenuItem;
           procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -36,8 +38,10 @@ type
           procedure ActionOrderExecute(Sender: TObject);
           procedure ActionTypePaymentExecute(Sender: TObject);
           procedure ActionCloseTabSheetExecute(Sender: TObject);
+          procedure ActionUserExecute(Sender: TObject);
      private
           { Private declarations }
+          procedure SetAction(Sender: TObject; nameForm: String);
           procedure SetTitle;
           procedure SetStatus;
           procedure SetWebPage(WebAddress: String);
@@ -61,38 +65,27 @@ end;
 
 procedure TFormMain.ActionCustomerExecute(Sender: TObject);
 begin
-     TAction(Sender).Enabled := False;
-     //
-     TControllerTabFormFactory.New.Default.ShowForm(TControllerTabFormFactory.New.Default.CreateTab(TAction(Sender), PageControl), 'FormCustomer');
-     //
-     TAction(Sender).Enabled := True;
+     SetAction(Sender, 'FormCustomer');
 end;
 
 procedure TFormMain.ActionOrderExecute(Sender: TObject);
 begin
-     TAction(Sender).Enabled := False;
-     //
-     TControllerTabFormFactory.New.Default.ShowForm(TControllerTabFormFactory.New.Default.CreateTab(TAction(Sender), PageControl), 'FormOrder');
-     //
-     TAction(Sender).Enabled := True;
+     SetAction(Sender, 'FormOrder');
 end;
 
 procedure TFormMain.ActionProductExecute(Sender: TObject);
 begin
-     TAction(Sender).Enabled := False;
-     //
-     TControllerTabFormFactory.New.Default.ShowForm(TControllerTabFormFactory.New.Default.CreateTab(TAction(Sender), PageControl), 'FormProduct');
-     //
-     TAction(Sender).Enabled := True;
+     SetAction(Sender, 'FormProduct');
 end;
 
 procedure TFormMain.ActionTypePaymentExecute(Sender: TObject);
 begin
-     TAction(Sender).Enabled := False;
-     //
-     TControllerTabFormFactory.New.Default.ShowForm(TControllerTabFormFactory.New.Default.CreateTab(TAction(Sender), PageControl), 'FormTypePayment');
-     //
-     TAction(Sender).Enabled := True;
+     SetAction(Sender, 'FormTypePayment');
+end;
+
+procedure TFormMain.ActionUserExecute(Sender: TObject);
+begin
+     SetAction(Sender, 'FormUser');
 end;
 
 procedure TFormMain.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -121,6 +114,15 @@ begin
      SetTitle;
      //
      SetStatus;
+end;
+
+procedure TFormMain.SetAction(Sender: TObject; nameForm: String);
+begin
+     TAction(Sender).Enabled := False;
+     //
+     TControllerTabFormFactory.New.Default.ShowForm(TControllerTabFormFactory.New.Default.CreateTab(TAction(Sender), PageControl), nameForm);
+     //
+     TAction(Sender).Enabled := True;
 end;
 
 procedure TFormMain.SetStatus;

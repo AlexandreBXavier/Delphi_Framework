@@ -12,7 +12,8 @@ type
           constructor Create(Connection: iModelConnection);
           destructor Destroy; Override;
           class function New(Connection: iModelConnection): iEntity;
-          function List(var Value: TDataSource): iEntity;
+          function List: iEntity;
+          function DataSet: TDataSet;
      end;
 
 implementation
@@ -22,7 +23,12 @@ implementation
 
 constructor TModelEntityTypePayment.Create(Connection: iModelConnection);
 begin
-     FQuery := TControllerQueryFactory.New.Query(Connection)
+     FQuery := TControllerQueryFactory.New.Query(Connection);
+end;
+
+function TModelEntityTypePayment.DataSet: TDataSet;
+begin
+     Result := FQuery.Dataset;
 end;
 
 destructor TModelEntityTypePayment.Destroy;
@@ -32,13 +38,11 @@ begin
      inherited;
 end;
 
-function TModelEntityTypePayment.List(var Value: TDataSource): iEntity;
+function TModelEntityTypePayment.List: iEntity;
 begin
      Result := Self;
      //
-     FQuery.SQL('SELECT * FROM TypePayment').Open;;
-     //
-     Value.DataSet := FQuery.Dataset;
+     FQuery.SQL('SELECT * FROM tbTypePayment').Open;
 end;
 
 class function TModelEntityTypePayment.New(Connection: iModelConnection): iEntity;

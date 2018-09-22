@@ -69,7 +69,7 @@ type
 
      iControllerSecurityDefault = interface
           ['{5B1DA1D8-DF07-4627-9CFE-0B4F68CDA640}']
-          function Login(aUser, aPasswood: String): Boolean;
+          function Login(aUsername, aPasswood: String): Integer;
           function ShowLog: TStrings;
           function AddLog(aLog: String): iControllerSecurityDefault;
           function EnCrypt(InString: String): String;

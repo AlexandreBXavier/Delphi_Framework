@@ -22,14 +22,18 @@ type
           FSQLDatabaseName: String;
           FSQLUserName: String;
           FSQLPassword: String;
+          FSystemidUser: Integer;
           FSystemUsername: String;
           //
           procedure SetConfig;
+          procedure SetInitialValues;
           function ConnectDatabase: Boolean;
      public
           { Public declarations }
           function Connected: Boolean;
           function GetConnection: iModelConnection;
+          function GetidUser: Integer;
+          procedure SetidUser(Value: Integer);
           function GetUsername: String;
           procedure SetUsername(Value: String);
      end;
@@ -47,6 +51,8 @@ uses Invoice.Controller.IniFile.Factory, Invoice.Controller.Connection.Factory, 
 
 procedure TDataModuleLocal.DataModuleCreate(Sender: TObject);
 begin
+     SetInitialValues;
+     //
      SetConfig;
      //
      ConnectDatabase;
@@ -60,6 +66,11 @@ end;
 function TDataModuleLocal.GetConnection: iModelConnection;
 begin
      Result := FConnectionLocal;
+end;
+
+function TDataModuleLocal.GetidUser: Integer;
+begin
+     Result := FSystemidUser;
 end;
 
 function TDataModuleLocal.GetUsername: String;
@@ -96,6 +107,22 @@ begin
      FSQLDatabaseName := TControllerIniFileFactory.New.Default.InputKey('Server', 'DatabaseName', '<Database Name>', False);
      FSQLUserName := TControllerIniFileFactory.New.Default.InputKey('Server', 'UserName', '<User Name>', False);
      FSQLPassword := TControllerIniFileFactory.New.Default.InputKey('Server', 'UserPassword', '<User Password>', True);
+end;
+
+procedure TDataModuleLocal.SetidUser(Value: Integer);
+begin
+     FSystemidUser := Value;
+end;
+
+procedure TDataModuleLocal.SetInitialValues;
+begin
+     FSQLServerName := '';
+     FSQLDatabaseName := '';
+     FSQLUserName := '';
+     FSQLPassword := '';
+     //
+     FSystemidUser := 0;
+     FSystemUsername := '';
 end;
 
 procedure TDataModuleLocal.SetUsername(Value: String);

@@ -10,7 +10,6 @@ uses
 type
      TFormCustomer = class(TFormTemplateRegister)
           procedure FormCreate(Sender: TObject);
-          procedure FormShow(Sender: TObject);
      private
           { Private declarations }
           FEntity: iEntity;
@@ -31,16 +30,10 @@ procedure TFormCustomer.FormCreate(Sender: TObject);
 begin
      try
           FEntity := TModelEntityCustomer.New(DataModuleLocal.GetConnection);
-     except
-          on E: Exception do
-               raise Exception.Create(E.Message);
-     end;
-end;
-
-procedure TFormCustomer.FormShow(Sender: TObject);
-begin
-     try
-          FEntity.List(DataSource);
+          //
+          FEntity.List;
+          //
+          DataSource.DataSet := FEntity.DataSet;
      except
           on E: Exception do
                raise Exception.Create(E.Message);

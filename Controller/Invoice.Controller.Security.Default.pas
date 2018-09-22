@@ -14,7 +14,7 @@ type
           constructor Create;
           destructor Destroy; Override;
           class function New: iControllerSecurityDefault;
-          function Login(aUser, aPasswood: String): Boolean;
+          function Login(aUsername, aPasswood: String): Integer;
           function ShowLog: TStrings;
           function AddLog(aLog: String): iControllerSecurityDefault;
           function EnCrypt(InString: String): String;
@@ -50,9 +50,11 @@ begin
      Result := Self.Create;
 end;
 
-function TControllerSecurityDefault.Login(aUser, aPasswood: String): Boolean;
+function TControllerSecurityDefault.Login(aUsername, aPasswood: String): Integer;
 begin
-     Result := (aUser = aPasswood);
+     Result := 0;
+     //
+     if (aUsername = aPasswood) then Result := 1;
 end;
 
 function TControllerSecurityDefault.AddLog(aLog: String): iControllerSecurityDefault;
