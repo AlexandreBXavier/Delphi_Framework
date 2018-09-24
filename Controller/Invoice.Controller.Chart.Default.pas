@@ -122,7 +122,7 @@ begin
           aChart.Add('    </script>');
           aChart.Add('  </head>');
           aChart.Add('  <body>');
-          aChart.Add('    <div id="' + aTypeChart + '" style="width: ' + IntToStr(aWidth-20) + 'px; height: ' + IntToStr(aHeight-20) + 'px;"></div>');
+          aChart.Add('    <div id="' + aTypeChart + '" style="width: ' + IntToStr(aWidth-60) + 'px; height: ' + IntToStr(aHeight-60) + 'px;"></div>');
           aChart.Add('  </body>');
           aChart.Add('</html>');
      finally

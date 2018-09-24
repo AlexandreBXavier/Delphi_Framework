@@ -3,23 +3,21 @@ unit Invoice.View.Chart;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.OleCtrls, SHDocVw;
+     Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+     Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.OleCtrls, SHDocVw;
 
 type
-  TFormChart = class(TForm)
-    Panel1: TPanel;
-    WebBrowser: TWebBrowser;
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure FormShow(Sender: TObject);
+     TFormChart = class(TForm)
+     PanelBackground: TPanel;
+     WebBrowserLocal: TWebBrowser;
+     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+     procedure FormShow(Sender: TObject);
   private
-    { Private declarations }
+     { Private declarations }
      procedure SetWebPage(WebAddress: String);
      procedure SetWebChart;
-
   public
-    { Public declarations }
+     { Public declarations }
   end;
 
 var
@@ -34,7 +32,7 @@ uses Invoice.Controller.Chart.Factory, Invoice.Controller.AppInfo.Factory;
 
 procedure TFormChart.SetWebPage(WebAddress: String);
 begin
-     WebBrowser.Navigate(WebAddress);
+     WebBrowserLocal.Navigate(WebAddress);
 end;
 
 procedure TFormChart.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -60,7 +58,7 @@ begin
           .AddValue('Cups','90')
           .AddValue('Papers','88')
           .AddValue('Scissors','63')
-          .ShowChart(WebBrowser);
+          .ShowChart(WebBrowserLocal);
 end;
 
 Initialization

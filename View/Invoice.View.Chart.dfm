@@ -18,7 +18,7 @@ object FormChart: TFormChart
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object PanelBackground: TPanel
     Left = 0
     Top = 0
     Width = 687
@@ -27,7 +27,7 @@ object FormChart: TFormChart
     BevelInner = bvLowered
     BorderWidth = 2
     TabOrder = 0
-    object WebBrowser: TWebBrowser
+    object WebBrowserLocal: TWebBrowser
       Left = 4
       Top = 4
       Width = 679
