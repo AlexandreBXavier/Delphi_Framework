@@ -105,21 +105,6 @@ object FormMain: TFormMain
     TabOrder = 2
     object TabWelcome: TTabSheet
       Caption = 'Welcome'
-      object WebBrowser: TWebBrowser
-        Left = 0
-        Top = 0
-        Width = 802
-        Height = 419
-        Align = alClient
-        TabOrder = 0
-        ExplicitTop = -2
-        ControlData = {
-          4C000000E45200004E2B00000000000000000000000000000000000000000000
-          000000004C000000000000000000000001000000E0D057007335CF11AE690800
-          2B2E12620A000000000000004C0000000114020000000000C000000000000046
-          8000000000000000000000000000000000000000000000000000000000000000
-          00000000000000000100000000000000000000000000000000000000}
-      end
     end
   end
   object ActionManager: TActionManager
@@ -200,6 +185,11 @@ object FormMain: TFormMain
       Caption = 'CloseTab'
       ImageIndex = 8
       OnExecute = ActionCloseTabSheetExecute
+    end
+    object ActionChart: TAction
+      Caption = 'Chart'
+      ImageIndex = 135
+      OnExecute = ActionChartExecute
     end
   end
   object PopupMenu: TPopupMenu

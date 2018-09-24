@@ -8,6 +8,7 @@ uses
   System.Classes,
   System.SysUtils,
   Winapi.Windows,
+  Invoice.View.Chart in 'View\Invoice.View.Chart.pas' {FormChart},
   Invoice.View.SplashScreen in 'View\Invoice.View.SplashScreen.pas' {FormSplashScreen},
   Invoice.View.Template.Register in 'View\Template\Invoice.View.Template.Register.pas' {FormTemplateRegister},
   Invoice.View.LogIn in 'View\Invoice.View.LogIn.pas' {FormLogin},
@@ -25,6 +26,8 @@ uses
   Invoice.Controller.WinInfo.Factory in 'Controller\Invoice.Controller.WinInfo.Factory.pas',
   Invoice.Controller.IniFile.Default in 'Controller\Invoice.Controller.IniFile.Default.pas',
   Invoice.Controller.IniFile.Factory in 'Controller\Invoice.Controller.IniFile.Factory.pas',
+  Invoice.Controller.Chart.Default in 'Controller\Invoice.Controller.Chart.Default.pas',
+  Invoice.Controller.Chart.Factory in 'Controller\Invoice.Controller.Chart.Factory.pas',
   Invoice.Controller.Security.Default in 'Controller\Invoice.Controller.Security.Default.pas',
   Invoice.Controller.TabForm.Default in 'Controller\Invoice.Controller.TabForm.Default.pas',
   Invoice.Controller.TabForm.Factory in 'Controller\Invoice.Controller.TabForm.Factory.pas',
@@ -65,7 +68,7 @@ begin
           Application.ProcessMessages;
           // Create Data Module...
           Application.CreateForm(TDataModuleLocal, DataModuleLocal);
-          // Show Login Screen...
+          //Show Login Screen...
           try
                FormLogin := TFormLogin.Create(Application);
           finally

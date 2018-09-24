@@ -2,7 +2,7 @@ unit Invoice.Controller.Interfaces;
 
 interface
 
-uses Vcl.ComCtrls, Vcl.ActnList, System.Classes;
+uses Vcl.ComCtrls, Vcl.ActnList, System.Classes, SHDocVw;
 
 type
      iControllerIniFileDefault = interface;
@@ -49,6 +49,20 @@ type
           function ProductName: String;
           function ProductVersion: String;
           function Comments: String;
+     end;
+
+     iControllerChartDefault = interface
+          ['{E68D2823-79B8-42F7-8455-B87FD5598C03}']
+          function SetCharTitle(aValue: String): iControllerChartDefault;
+          function SetCharSubTitle(aValue: String): iControllerChartDefault;
+          function AddTitle(aDescription, aValue: String): iControllerChartDefault;
+          function AddValue(aDescription, aValue: String): iControllerChartDefault;
+          procedure ShowChart(aWebBrowser: TWebBrowser);
+     end;
+
+     iControllerChartFactory = interface
+          ['{599B5323-71FF-46A5-9473-FF934913AD48}']
+          function Default: iControllerChartDefault;
      end;
 
      iControllerTabFormFactory = interface

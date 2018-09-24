@@ -4,10 +4,9 @@ interface
 
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-     Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList, Vcl.Menus, System.UITypes,
-     System.ImageList, Vcl.ImgList, Vcl.ComCtrls, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
-     Vcl.ToolWin, Vcl.ActnCtrls, Vcl.Ribbon, Vcl.RibbonLunaStyleActnCtrls, Vcl.RibbonSilverStyleActnCtrls,
-     Vcl.OleCtrls, SHDocVw, Data.DB, Vcl.StdCtrls, Vcl.Buttons;
+     Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ComCtrls, Vcl.Menus, System.UITypes,
+     Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, Vcl.ToolWin, Vcl.ActnCtrls,
+     Vcl.Ribbon, Vcl.RibbonLunaStyleActnCtrls, Vcl.RibbonSilverStyleActnCtrls;
 
 type
      TFormMain = class(TForm)
@@ -26,9 +25,9 @@ type
           RibbonGroupUser: TRibbonGroup;
           PageControl: TPageControl;
           TabWelcome: TTabSheet;
-          WebBrowser: TWebBrowser;
           PopupMenu: TPopupMenu;
           CloseTab: TMenuItem;
+          ActionChart: TAction;
           procedure FormClose(Sender: TObject; var Action: TCloseAction);
           procedure FormShow(Sender: TObject);
           procedure FormResize(Sender: TObject);
@@ -39,12 +38,12 @@ type
           procedure ActionTypePaymentExecute(Sender: TObject);
           procedure ActionCloseTabSheetExecute(Sender: TObject);
           procedure ActionUserExecute(Sender: TObject);
+          procedure ActionChartExecute(Sender: TObject);
      private
           { Private declarations }
           procedure SetAction(Sender: TObject; nameForm: String);
           procedure SetTitle;
           procedure SetStatus;
-          procedure SetWebPage(WebAddress: String);
      public
           { Public declarations }
      end;
@@ -56,11 +55,21 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.DataModule, Invoice.Controller.TabForm.Factory, Invoice.Controller.AppInfo.Factory, Invoice.Controller.WinInfo.Factory, Invoice.Controller.IniFile.Factory, Invoice.Controller.Security.Factory, Invoice.Controller.Connection.Factory;
+uses Invoice.Controller.DataModule, Invoice.Controller.TabForm.Factory, Invoice.Controller.AppInfo.Factory, Invoice.Controller.WinInfo.Factory, Invoice.Controller.IniFile.Factory, Invoice.Controller.Security.Factory, Invoice.Controller.Connection.Factory, Invoice.Controller.Chart.Factory;
+
+procedure TFormMain.ActionChartExecute(Sender: TObject);
+begin
+     TAction(Sender).Enabled := False;
+     //
+     TControllerTabFormFactory.New.Default.ShowForm(TabWelcome, 'FormChart');
+     //
+     TAction(Sender).Enabled := True;
+end;
 
 procedure TFormMain.ActionCloseTabSheetExecute(Sender: TObject);
 begin
-     if (PageControl.ActivePage <> nil) then PageControl.ActivePage.Free;
+     if (PageControl.ActivePage <> nil) then
+          PageControl.ActivePage.Free;
 end;
 
 procedure TFormMain.ActionCustomerExecute(Sender: TObject);
@@ -98,8 +107,6 @@ end;
 
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
-     SetWebPage(TControllerAppInfoFactory.New.Default.LegalTrademarks);
-     //
      if not DataModuleLocal.Connected then
           Application.Terminate;
 end;
@@ -114,6 +121,8 @@ begin
      SetTitle;
      //
      SetStatus;
+     //
+     ActionChartExecute(Sender);
 end;
 
 procedure TFormMain.SetAction(Sender: TObject; nameForm: String);
@@ -134,17 +143,10 @@ begin
 end;
 
 procedure TFormMain.SetTitle;
-var
-     StatusDB: String;
 begin
      Caption := TControllerAppInfoFactory.New.Default.CompanyName + ' - ' + Application.Title;
      //
      Ribbon.Caption := Caption;
-end;
-
-procedure TFormMain.SetWebPage(WebAddress: String);
-begin
-     WebBrowser.Navigate(WebAddress);
 end;
 
 end.
