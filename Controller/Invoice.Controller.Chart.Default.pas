@@ -94,7 +94,8 @@ begin
      // Use: https://developers.google.com/chart/interactive/docs/gallery
      try
           aChart := TStringList.Create;
-          aChart.Add('<!DOCTYPE html>');
+          aChart.Add('<html>');
+          aChart.Add('<meta http-equiv="X-UA-Compatible" content="IE=edge" />');
           aChart.Add('  <head>');
           aChart.Add('    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>');
           aChart.Add('    <script type="text/javascript">');
