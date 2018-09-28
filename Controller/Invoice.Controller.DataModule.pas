@@ -45,7 +45,8 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses Invoice.Controller.IniFile.Factory, Invoice.Controller.Connection.Factory, Invoice.Controller.Security.Factory;
+uses Invoice.Controller.IniFile.Factory, Invoice.Controller.Connection.Factory, Invoice.Controller.Security.Factory,
+  Vcl.Dialogs;
 
 {$R *.dfm}
 
@@ -80,6 +81,8 @@ end;
 
 procedure TDataModuleLocal.ApplicationEventsException(Sender: TObject; E: Exception);
 begin
+     MessageDlg(E.Message, mtError, [mbOk], 0);
+     //
      TControllerSecurityFactory.New.Default.AddLog(E.Message);
 end;
 

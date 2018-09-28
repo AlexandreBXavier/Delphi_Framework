@@ -13,11 +13,11 @@ type
           destructor Destroy; Override;
           class function New(Connection: iModelConnection): iEntity;
           function List: iEntity;
+          function ListWhere(aSQL: String): iEntity;
           function DataSet: TDataSet;
      end;
 
 implementation
-
 
 { TModelEntityTypePayment }
 
@@ -28,12 +28,12 @@ end;
 
 function TModelEntityTypePayment.DataSet: TDataSet;
 begin
-     Result := FQuery.Dataset;
+     Result := FQuery.DataSet;
 end;
 
 destructor TModelEntityTypePayment.Destroy;
 begin
-     FQuery.Close;
+     if FQuery.DataSet.Active then FQuery.Close;
      //
      inherited;
 end;
@@ -42,7 +42,14 @@ function TModelEntityTypePayment.List: iEntity;
 begin
      Result := Self;
      //
-     FQuery.SQL('SELECT * FROM tbTypePayment').Open;
+     FQuery.SQL('SELECT * FROM tbTypePayment WHERE idTypePayment = 0');
+end;
+
+function TModelEntityTypePayment.ListWhere(aSQL: String): iEntity;
+begin
+     Result := Self;
+     //
+     FQuery.SQL('SELECT * FROM tbTypePayment WHERE ' + aSQL);
 end;
 
 class function TModelEntityTypePayment.New(Connection: iModelConnection): iEntity;

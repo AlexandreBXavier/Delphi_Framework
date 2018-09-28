@@ -5,14 +5,14 @@ interface
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-     Vcl.ComCtrls, Invoice.Model.Interfaces, Invoice.View.Template.Register;
+     Vcl.ComCtrls, Invoice.Model.Interfaces, Invoice.View.Template.Register,
+  Vcl.StdCtrls;
 
 type
      TFormCustomer = class(TFormTemplateRegister)
-          procedure FormCreate(Sender: TObject);
+          function GetEntity: iEntity; override;
      private
           { Private declarations }
-          FEntity: iEntity;
      public
           { Public declarations }
      end;
@@ -26,18 +26,9 @@ implementation
 
 uses Invoice.Controller.DataModule, Invoice.Model.Entity.Customer;
 
-procedure TFormCustomer.FormCreate(Sender: TObject);
+function TFormCustomer.GetEntity: iEntity;
 begin
-     try
-          FEntity := TModelEntityCustomer.New(DataModuleLocal.GetConnection);
-          //
-          FEntity.List;
-          //
-          DataSource.DataSet := FEntity.DataSet;
-     except
-          on E: Exception do
-               raise Exception.Create(E.Message);
-     end;
+     Result := TModelEntityCustomer.New(DataModuleLocal.GetConnection);
 end;
 
 Initialization

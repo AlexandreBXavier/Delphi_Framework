@@ -9,10 +9,9 @@ uses
 
 type
      TFormTypePayment = class(TFormTemplateRegister)
-          procedure FormCreate(Sender: TObject);
+          function GetEntity: iEntity; override;
      private
           { Private declarations }
-          FEntity: iEntity;
      public
           { Public declarations }
      end;
@@ -26,18 +25,11 @@ implementation
 
 uses Invoice.Controller.DataModule, Invoice.Model.Entity.TypePayment;
 
-procedure TFormTypePayment.FormCreate(Sender: TObject);
+{ TFormTypePayment }
+
+function TFormTypePayment.GetEntity: iEntity;
 begin
-     try
-          FEntity := TModelEntityTypePayment.New(DataModuleLocal.GetConnection);
-          //
-          FEntity.List;
-          //
-          DataSource.DataSet := FEntity.DataSet;
-     except
-          on E: Exception do
-               raise Exception.Create(E.Message);
-     end;
+     Result := TModelEntityTypePayment.New(DataModuleLocal.GetConnection);
 end;
 
 Initialization

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="5.3.14" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="43371,4065654745" ReportOptions.Description.Text="" ReportOptions.LastChange="43371,4636085764" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="frxDBDataset" DataSetName="frxDBDataset"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
+    <TfrxMasterData Name="MasterData" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="26,45671" Left="0" Top="185,19697" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSet="frxDBDataset" DataSetName="frxDBDataset" RowCount="0">
+      <TfrxLineView Name="Line3" Left="0" Top="26,45671" Width="718,1107" Height="0" Color="8421504" Frame.Typ="4"/>
+    </TfrxMasterData>
+    <TfrxReportTitle Name="ReportTitle" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="60,47248" Left="0" Top="18,89765" Width="718,1107">
+      <TfrxMemoView Name="MemoTitle" Align="baWidth" Left="0" Top="1,55906" Width="718,1107" Height="56,69295" Font.Charset="1" Font.Color="0" Font.Height="-19" Font.Name="Arial" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[LabelTitle]&#13;&#10;[LabelSubTitle]">
+        <Formats>
+          <item/>
+          <item/>
+        </Formats>
+      </TfrxMemoView>
+    </TfrxReportTitle>
+    <TfrxPageHeader Name="PageHeader" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="22,67718" Left="0" Top="102,04731" Width="718,1107">
+      <TfrxMemoView Name="DemoMemo" Align="baBottom" Left="0" Top="3,7795422" Width="94,48825" Height="18,8976378" Visible="False" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" ParentFont="False" WordWrap="False" Text="Demo"/>
+      <TfrxLineView Name="Line1" Left="0" Top="22,67718" Width="714,33117" Height="0" Color="0" Frame.Typ="4"/>
+    </TfrxPageHeader>
+    <TfrxPageFooter Name="PageFooter1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="22,67718" Left="0" Top="272,12616" Width="718,1107">
+      <TfrxLineView Name="Line2" Left="3,77953" Top="0" Width="718,1107" Height="0" Color="0" Frame.Typ="4"/>
+      <TfrxMemoView Name="Memo1" Left="529,1342" Top="3,77953" Width="185,19697" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" HAlign="haRight" ParentFont="False" Text="[&#60;Date&#62;] at [&#60;Time&#62;]"/>
+      <TfrxMemoView Name="Memo2" Left="0" Top="3" Width="185,19697" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="Page [Page]"/>
+    </TfrxPageFooter>
+  </TfrxReportPage>
+</TfrxReport>

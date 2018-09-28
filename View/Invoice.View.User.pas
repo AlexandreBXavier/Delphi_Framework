@@ -9,10 +9,9 @@ uses
 
 type
      TFormUser = class(TFormTemplateRegister)
-          procedure FormCreate(Sender: TObject);
+          function GetEntity: iEntity; override;
      private
           { Private declarations }
-          FEntity: iEntity;
      public
           { Public declarations }
      end;
@@ -26,18 +25,9 @@ implementation
 
 uses Invoice.Controller.DataModule, Invoice.Model.Entity.User;
 
-procedure TFormUser.FormCreate(Sender: TObject);
+function TFormUser.GetEntity: iEntity;
 begin
-     try
-          FEntity := TModelEntityUser.New(DataModuleLocal.GetConnection);
-          //
-          FEntity.List;
-          //
-          DataSource.DataSet := FEntity.DataSet;
-     except
-          on E: Exception do
-               raise Exception.Create(E.Message);
-     end;
+     Result := TModelEntityUser.New(DataModuleLocal.GetConnection);
 end;
 
 Initialization

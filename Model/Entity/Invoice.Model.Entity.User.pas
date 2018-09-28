@@ -13,6 +13,7 @@ type
           destructor Destroy; Override;
           class function New(Connection: iModelConnection): iEntity;
           function List: iEntity;
+          function ListWhere(aSQL: String): iEntity;
           function DataSet: TDataSet;
      end;
 
@@ -27,12 +28,12 @@ end;
 
 function TModelEntityUser.DataSet: TDataSet;
 begin
-     Result := FQuery.Dataset;
+     Result := FQuery.DataSet;
 end;
 
 destructor TModelEntityUser.Destroy;
 begin
-     FQuery.Close;
+     if FQuery.DataSet.Active then FQuery.Close;
      //
      inherited;
 end;
@@ -41,7 +42,14 @@ function TModelEntityUser.List: iEntity;
 begin
      Result := Self;
      //
-     FQuery.SQL('SELECT * FROM tbUser').Open;
+     FQuery.SQL('SELECT * FROM tbUser WHERE idUser = 0');
+end;
+
+function TModelEntityUser.ListWhere(aSQL: String): iEntity;
+begin
+     Result := Self;
+     //
+     FQuery.SQL('SELECT * FROM tbUser WHERE ' + aSQL);
 end;
 
 class function TModelEntityUser.New(Connection: iModelConnection): iEntity;
