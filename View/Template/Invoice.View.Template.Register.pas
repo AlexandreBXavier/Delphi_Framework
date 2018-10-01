@@ -5,7 +5,8 @@ interface
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ExtCtrls,
-     Vcl.DBCtrls, Vcl.StdCtrls, Invoice.Model.Interfaces, frxClass, frxDBSet;
+     Vcl.DBCtrls, Vcl.StdCtrls, Invoice.Model.Interfaces, frxClass, frxDBSet,
+     Vcl.Mask;
 
 type
      TFormTemplateRegister = class(TForm)
@@ -23,6 +24,13 @@ type
           frxReportModel: TfrxReport;
           frxDBDataset: TfrxDBDataset;
           ButtonPrint: TButton;
+          ButtonInsert: TButton;
+          ButtonDelete: TButton;
+          ButtonEdit: TButton;
+          ButtonSave: TButton;
+          ButtonCancel: TButton;
+          LabelID: TLabel;
+          DBEditID: TDBEdit;
           procedure ButtonFindClick(Sender: TObject);
           procedure FormClose(Sender: TObject; var Action: TCloseAction);
           procedure FormShow(Sender: TObject);
@@ -31,12 +39,19 @@ type
           procedure FormResize(Sender: TObject);
           procedure ButtonPrintClick(Sender: TObject);
           procedure DataSourceDataChange(Sender: TObject; Field: TField);
+          procedure ButtonInsertClick(Sender: TObject);
+          procedure ButtonDeleteClick(Sender: TObject);
+          procedure ButtonEditClick(Sender: TObject);
+          procedure ButtonSaveClick(Sender: TObject);
+          procedure ButtonCancelClick(Sender: TObject);
+          procedure DBGridRecordsTitleClick(Column: TColumn);
      private
           { Private declarations }
           FEntity: iEntity;
           //
           procedure FindRecords;
           procedure ListComboBoxField;
+          procedure AutoCreateFields;
      public
           { Public declarations }
      end;
@@ -50,11 +65,32 @@ implementation
 
 uses Invoice.Controller.DataModule;
 
+procedure TFormTemplateRegister.ButtonCancelClick(Sender: TObject);
+begin
+     DataSource.DataSet.Cancel;
+end;
+
+procedure TFormTemplateRegister.ButtonDeleteClick(Sender: TObject);
+begin
+     if (MessageDlg('Do you really delete record?', mtConfirmation, [mbYes, mbNo], 0) = mrYES) then
+          DataSource.DataSet.Delete;
+end;
+
+procedure TFormTemplateRegister.ButtonEditClick(Sender: TObject);
+begin
+     DataSource.DataSet.Edit;
+end;
+
 procedure TFormTemplateRegister.ButtonFindClick(Sender: TObject);
 begin
      FindRecords;
      //
      FormResize(Sender);
+end;
+
+procedure TFormTemplateRegister.ButtonInsertClick(Sender: TObject);
+begin
+     DataSource.DataSet.Insert;
 end;
 
 procedure TFormTemplateRegister.ButtonPrintClick(Sender: TObject);
@@ -113,7 +149,7 @@ begin
                          TfrxMemoView(frxReportModel.FindObject(nameColunm)).Left := aCount;
                          TfrxMemoView(frxReportModel.FindObject(nameColunm)).Width := aWidth;
                          //
-                         if (DBGridRecords.Columns[aColunm].Alignment  = taLeftJustify) then
+                         if (DBGridRecords.Columns[aColunm].Alignment = taLeftJustify) then
                               TfrxMemoView(frxReportModel.FindObject(nameColunm)).HAlign := TfrxHAlign(0)
                          else if (DBGridRecords.Columns[aColunm].Alignment = taRightJustify) then
                               TfrxMemoView(frxReportModel.FindObject(nameColunm)).HAlign := TfrxHAlign(1)
@@ -165,9 +201,32 @@ begin
      frxReportModel.ShowReport(True);
 end;
 
+procedure TFormTemplateRegister.ButtonSaveClick(Sender: TObject);
+begin
+     DataSource.DataSet.Post;
+end;
+
 procedure TFormTemplateRegister.DataSourceDataChange(Sender: TObject; Field: TField);
 begin
-     ButtonPrint.Visible := DataSource.DataSet.Active and (DataSource.DataSet.RecordCount > 0);
+     ButtonInsert.Visible := DataSource.DataSet.Active and (DataSource.DataSet.State = dsBrowse);
+     ButtonEdit.Visible := DataSource.DataSet.Active and (DataSource.DataSet.State = dsBrowse) and (DataSource.DataSet.RecordCount > 0);
+     ButtonDelete.Visible := DataSource.DataSet.Active and (DataSource.DataSet.State = dsBrowse) and (DataSource.DataSet.RecordCount > 0);
+     ButtonSave.Visible := DataSource.DataSet.Active and (DataSource.DataSet.State in [dsInsert, dsEdit]);
+     ButtonCancel.Visible := DataSource.DataSet.Active and (DataSource.DataSet.State in [dsInsert, dsEdit]);
+     ButtonPrint.Visible := DataSource.DataSet.Active and (DataSource.DataSet.State = dsBrowse) and (DataSource.DataSet.RecordCount > 0);
+     //
+     TabInfo.TabVisible := DataSource.DataSet.Active and (DataSource.DataSet.State in [dsInsert, dsEdit]);
+     TabList.TabVisible := not TabInfo.Visible;
+     //
+     if TabInfo.TabVisible then
+          PageControl.ActivePage := TabInfo
+     else
+          PageControl.ActivePage := TabList;
+end;
+
+procedure TFormTemplateRegister.DBGridRecordsTitleClick(Column: TColumn);
+begin
+     FEntity.OrderBy(Column.FieldName);
 end;
 
 procedure TFormTemplateRegister.FindRecords;
@@ -197,6 +256,11 @@ end;
 
 procedure TFormTemplateRegister.FormCreate(Sender: TObject);
 begin
+     TabInfo.TabVisible := False;
+     TabList.TabVisible := True;
+     //
+     PageControl.ActivePage := TabList;
+     //
      FEntity := GetEntity;
      //
      try
@@ -241,6 +305,8 @@ begin
           DataSource.DataSet.Open;
      //
      ListComboBoxField;
+     //
+     AutoCreateFields;
 end;
 
 function TFormTemplateRegister.GetEntity: iEntity;
@@ -257,6 +323,157 @@ begin
           DataSource.DataSet.Fields.GetFieldNames(ComboBoxField.Items);
           //
           ComboBoxField.ItemIndex := 1;
+     end;
+end;
+
+procedure TFormTemplateRegister.AutoCreateFields;
+var
+     LocalCount: Integer;
+     Line: Integer;
+     Colunm: Integer;
+     LookupDataSource: TDataSource;
+     LocalLabel: TLabel;
+     LocalEdit: TDBEdit;
+     LocalCheckBox: TDBCheckBox;
+     LocalLookupComboBox: TDBLookupComboBox;
+begin
+     if (DataSource.DataSet.FieldCount > 0) then
+     begin
+          Line := DBEditID.Top;
+          Colunm := DBEditID.Left + DBEditID.Width + 10;
+          //
+          DBEditID.DataField := DataSource.DataSet.Fields[0].FieldName;
+          //
+          for LocalCount := 1 to DataSource.DataSet.FieldCount - 1 do
+          begin
+               if DataSource.DataSet.Fields[LocalCount].Visible and (DataSource.DataSet.Fields[LocalCount].ProviderFlags <> []) then
+               begin
+                    if (DataSource.DataSet.Fields[LocalCount].LookupDataSet <> Nil) then
+                    begin
+                         LookupDataSource := TDataSource.Create(Self);
+                         LookupDataSource.Name := 'srcLookup' + DataSource.DataSet.Fields[LocalCount].FieldName;
+                         LookupDataSource.DataSet := DataSource.DataSet.Fields[LocalCount].LookupDataSet;
+                         //
+                         LocalLookupComboBox := TDBLookupComboBox.Create(Self);
+                         LocalLookupComboBox.Name := 'DBLookup' + DataSource.DataSet.Fields[LocalCount].FieldName;
+                         LocalLookupComboBox.Parent := TabInfo;
+                         LocalLookupComboBox.Top := Line;
+                         LocalLookupComboBox.Left := Colunm;
+                         LocalLookupComboBox.DataSource := DataSource;
+                         LocalLookupComboBox.DataField := DataSource.DataSet.Fields[LocalCount].FieldName;
+                         LocalLookupComboBox.Width := DataSource.DataSet.Fields[LocalCount].DisplayWidth * 6;
+                         LocalLookupComboBox.ListSource := LookupDataSource;
+                         LocalLookupComboBox.KeyField := DataSource.DataSet.Fields[LocalCount].LookupKeyFields;
+                         LocalLookupComboBox.ListField := DataSource.DataSet.Fields[LocalCount].LookupResultField;
+                         //
+                         if DataSource.DataSet.Fields[LocalCount].ReadOnly then
+                         begin
+                              LocalLookupComboBox.ShowHint := False;
+                              LocalLookupComboBox.Hint := '';
+                              LocalLookupComboBox.ReadOnly := True;
+                              LocalLookupComboBox.Color := DBEditID.Color;
+                         end
+                         else
+                         begin
+                              LocalLookupComboBox.ShowHint := True;
+                              LocalLookupComboBox.Hint := 'Informe ' + DataSource.DataSet.Fields[LocalCount].DisplayLabel;
+                              LocalLookupComboBox.ReadOnly := False;
+                              LocalLookupComboBox.Color := ComboBoxField.Color;
+                         end;
+                         //
+                         LocalLabel := TLabel.Create(Self);
+                         LocalLabel.Name := 'Label' + DataSource.DataSet.Fields[LocalCount].FieldName;
+                         LocalLabel.Parent := TabInfo;
+                         LocalLabel.Top := Line - 15;
+                         LocalLabel.Left := Colunm;
+                         LocalLabel.Caption := DataSource.DataSet.Fields[LocalCount].DisplayLabel;
+                         LocalLabel.Width := DataSource.DataSet.Fields[LocalCount].DisplayWidth * 6;
+                         LocalLabel.Hint := '';
+                         LocalLabel.ShowHint := False;
+                         LocalLabel.FocusControl := LocalLookupComboBox;
+                         LocalLabel.StyleElements := [seClient, seBorder];
+                         //
+                         Colunm := Colunm + LocalLookupComboBox.Width + 10;
+                    end
+                    else
+                    begin
+                         if DataSource.DataSet.Fields[LocalCount].DataType in [TFieldType.ftInteger, TFieldType.ftString, TFieldType.ftCurrency] then
+                         begin
+                              LocalEdit := TDBEdit.Create(Self);
+                              LocalEdit.Name := 'DBEdit' + DataSource.DataSet.Fields[LocalCount].FieldName;
+                              LocalEdit.Parent := TabInfo;
+                              LocalEdit.Top := Line;
+                              LocalEdit.Left := Colunm;
+                              LocalEdit.DataSource := DataSource;
+                              LocalEdit.DataField := DataSource.DataSet.Fields[LocalCount].FieldName;
+                              LocalEdit.MaxLength := DataSource.DataSet.Fields[LocalCount].DisplayWidth;
+                              LocalEdit.Width := DataSource.DataSet.Fields[LocalCount].DisplayWidth * 6;
+                              //
+                              if DataSource.DataSet.Fields[LocalCount].ReadOnly then
+                              begin
+                                   LocalEdit.ShowHint := False;
+                                   LocalEdit.Hint := '';
+                                   LocalEdit.ReadOnly := True;
+                                   LocalEdit.Color := DBEditID.Color;
+                              end
+                              else
+                              begin
+                                   LocalEdit.ShowHint := True;
+                                   LocalEdit.Hint := 'Informe ' + DataSource.DataSet.Fields[LocalCount].DisplayLabel;
+                                   LocalEdit.ReadOnly := False;
+                                   LocalEdit.Color := ComboBoxField.Color;
+                              end;
+                              //
+                              LocalLabel := TLabel.Create(Self);
+                              LocalLabel.Name := 'Label' + DataSource.DataSet.Fields[LocalCount].FieldName;
+                              LocalLabel.Parent := TabInfo;
+                              LocalLabel.Top := Line - 15;
+                              LocalLabel.Left := Colunm;
+                              LocalLabel.Caption := DataSource.DataSet.Fields[LocalCount].DisplayLabel;
+                              LocalLabel.Width := DataSource.DataSet.Fields[LocalCount].DisplayWidth * 6;
+                              LocalLabel.Hint := '';
+                              LocalLabel.ShowHint := False;
+                              LocalLabel.FocusControl := LocalEdit;
+                              LocalLabel.StyleElements := [seClient, seBorder];
+                              //
+                              Colunm := Colunm + LocalEdit.Width + 10;
+                         end
+                         else if DataSource.DataSet.Fields[LocalCount].DataType in [TFieldType.ftBoolean] then
+                         begin
+                              LocalCheckBox := TDBCheckBox.Create(Self);
+                              LocalCheckBox.Name := 'DBCheckBox' + DataSource.DataSet.Fields[LocalCount].FieldName;
+                              LocalCheckBox.Parent := TabInfo;
+                              LocalCheckBox.Top := Line;
+                              LocalCheckBox.Left := Colunm;
+                              LocalCheckBox.DataSource := DataSource;
+                              LocalCheckBox.DataField := DataSource.DataSet.Fields[LocalCount].FieldName;
+                              LocalCheckBox.Caption := DataSource.DataSet.Fields[LocalCount].DisplayLabel;
+                              LocalCheckBox.Width := (Length(DataSource.DataSet.Fields[LocalCount].DisplayLabel) * 6) + 10;
+                              //
+                              if DataSource.DataSet.Fields[LocalCount].ReadOnly then
+                              begin
+                                   LocalCheckBox.ShowHint := False;
+                                   LocalEdit.Hint := '';
+                                   LocalEdit.ReadOnly := True;
+                              end
+                              else
+                              begin
+                                   LocalCheckBox.ShowHint := True;
+                                   LocalEdit.Hint := 'Informe ' + DataSource.DataSet.Fields[LocalCount].DisplayLabel;
+                                   LocalEdit.ReadOnly := False;
+                              end;
+                              //
+                              Colunm := Colunm + LocalCheckBox.Width + 10;
+                         end;
+                    end;
+                    //
+                    if (Colunm > 600) then
+                    begin
+                         Colunm := DBEditID.Left;
+                         Line := Line + 40;
+                    end;
+               end;
+          end;
      end;
 end;
 

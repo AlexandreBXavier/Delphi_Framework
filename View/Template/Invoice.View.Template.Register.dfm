@@ -38,17 +38,38 @@ object FormTemplateRegister: TFormTemplateRegister
         Height = 466
         Align = alClient
         DataSource = DataSource
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        ReadOnly = True
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
+        OnDblClick = ButtonEditClick
+        OnTitleClick = DBGridRecordsTitleClick
       end
     end
     object TabInfo: TTabSheet
       Caption = 'Details of Record'
       ImageIndex = 1
+      object LabelID: TLabel
+        Left = 3
+        Top = 21
+        Width = 10
+        Height = 13
+        Caption = 'Id'
+      end
+      object DBEditID: TDBEdit
+        Left = 3
+        Top = 36
+        Width = 106
+        Height = 21
+        Color = clBtnFace
+        DataSource = DataSource
+        ReadOnly = True
+        TabOrder = 0
+      end
     end
   end
   object PanelNavigator: TPanel
@@ -66,33 +87,77 @@ object FormTemplateRegister: TFormTemplateRegister
       Caption = 'Field'
     end
     object LabelValue: TLabel
-      Left = 155
+      Left = 119
       Top = 11
       Width = 26
       Height = 13
       Caption = 'Value'
     end
+    object ButtonCancel: TButton
+      Left = 509
+      Top = 11
+      Width = 75
+      Height = 40
+      Caption = 'Cancel'
+      ImageIndex = 8
+      Images = DataModuleLocal.ImageList32_E
+      TabOrder = 8
+      OnClick = ButtonCancelClick
+    end
+    object ButtonDelete: TButton
+      Left = 509
+      Top = 11
+      Width = 75
+      Height = 40
+      Caption = 'Delete'
+      ImageIndex = 51
+      Images = DataModuleLocal.ImageList32_E
+      TabOrder = 5
+      OnClick = ButtonDeleteClick
+    end
+    object ButtonSave: TButton
+      Left = 428
+      Top = 11
+      Width = 75
+      Height = 40
+      Caption = 'Save'
+      ImageIndex = 52
+      Images = DataModuleLocal.ImageList32_E
+      TabOrder = 7
+      OnClick = ButtonSaveClick
+    end
+    object ButtonInsert: TButton
+      Left = 428
+      Top = 11
+      Width = 75
+      Height = 40
+      Caption = 'Insert'
+      ImageIndex = 57
+      Images = DataModuleLocal.ImageList32_E
+      TabOrder = 4
+      OnClick = ButtonInsertClick
+    end
     object ComboBoxField: TComboBox
       Left = 4
       Top = 30
-      Width = 145
+      Width = 109
       Height = 21
       Style = csDropDownList
       TabOrder = 0
     end
     object EditValue: TEdit
-      Left = 155
+      Left = 119
       Top = 30
-      Width = 262
+      Width = 222
       Height = 21
       TabOrder = 1
       TextHint = '<Input Value>'
       OnEnter = ButtonFindClick
     end
     object ButtonFind: TButton
-      Left = 423
-      Top = 12
-      Width = 90
+      Left = 347
+      Top = 11
+      Width = 75
       Height = 40
       Caption = 'Find'
       ImageIndex = 65
@@ -101,15 +166,26 @@ object FormTemplateRegister: TFormTemplateRegister
       OnClick = ButtonFindClick
     end
     object ButtonPrint: TButton
-      Left = 519
+      Left = 671
       Top = 11
-      Width = 90
+      Width = 75
       Height = 40
       Caption = 'Print'
       ImageIndex = 58
       Images = DataModuleLocal.ImageList32_E
       TabOrder = 3
       OnClick = ButtonPrintClick
+    end
+    object ButtonEdit: TButton
+      Left = 590
+      Top = 11
+      Width = 75
+      Height = 40
+      Caption = 'Edit'
+      ImageIndex = 141
+      Images = DataModuleLocal.ImageList32_E
+      TabOrder = 6
+      OnClick = ButtonEditClick
     end
   end
   object DataSource: TDataSource

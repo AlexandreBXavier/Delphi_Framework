@@ -36,6 +36,7 @@ type
           procedure Close;
           function SQL(Value: String): iQuery;
           function DataSet: TDataSet;
+          function Order(aFieldName: String): iQuery;
      end;
 
      iTable = interface
@@ -48,6 +49,7 @@ type
           function List: iEntity;
           function ListWhere(aSQL: String): iEntity;
           function DataSet: TDataSet;
+          function OrderBy(aFieldName: String): iEntity;
      end;
 
      iModelTableFactory = interface

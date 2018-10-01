@@ -23,6 +23,7 @@ type
           procedure Close;
           function SQL(Value: String): iQuery;
           function DataSet: TDataSet;
+          function Order(aFieldName: String): iQuery;
      end;
 
 implementation
@@ -71,6 +72,11 @@ end;
 procedure TModelQueryFiredac.Open;
 begin
      FQuery.Active := True;
+end;
+
+function TModelQueryFiredac.Order(aFieldName: String): iQuery;
+begin
+     FQuery.IndexFieldNames := aFieldName;
 end;
 
 procedure TModelQueryFiredac.Close;
