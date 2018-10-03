@@ -8,9 +8,26 @@ inherited FormCustomer: TFormCustomer
     end
     inherited TabInfo: TTabSheet
       Caption = 'Details of Customer'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitHeight = 0
+    end
+  end
+  inherited frxReportModel: TfrxReport
+    Datasets = <
+      item
+        DataSet = frxDBDataset
+        DataSetName = 'frxDBDataset'
+      end>
+    Variables = <>
+    Style = <>
+    inherited Page1: TfrxReportPage
+      inherited ReportTitle: TfrxReportTitle
+        inherited MemoTitle: TfrxMemoView
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+      end
     end
   end
 end

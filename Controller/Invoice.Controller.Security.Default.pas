@@ -2,11 +2,13 @@ unit Invoice.Controller.Security.Default;
 
 interface
 
-uses Invoice.Controller.Interfaces, System.Classes, System.SysUtils, System.IOUtils, Vcl.Forms, Vcl.Dialogs;
+uses Invoice.Controller.Interfaces, System.Classes, System.SysUtils, System.IOUtils, Vcl.Forms, Vcl.Dialogs,
+     Invoice.Model.Interfaces;
 
 type
      TControllerSecurityDefault = class(TInterfacedObject, iControllerSecurityDefault)
      private
+          FEntity: iEntity;
           FListLog: TStrings;
           FFileName: String;
           procedure SaveLog;
@@ -25,6 +27,7 @@ implementation
 
 { TControllerSecurityDefault }
 
+uses Invoice.Controller.DataModule, Invoice.Model.Entity.User;
 
 const
      KeyCrypt = 'YUQL23KL23DF90WI5E1JAS467NMCXXL6JAOAUWWMCL0AOMM4A4VZYW9KHJUI2347EJHJKDF3424SKL K3LAKDJSL9RTIKJ';
@@ -54,7 +57,14 @@ function TControllerSecurityDefault.Login(aUsername, aPasswood: String): Integer
 begin
      Result := 0;
      //
-     if (aUsername = aPasswood) then Result := 1;
+     if (aUsername <> '') and (aPasswood <> '') then
+     begin
+          FEntity := TModelEntityUser.New(DataModuleLocal.GetConnection);
+          //
+          FEntity.ListWhere('nameUser = ' + QuotedStr(aUsername) + ' AND passUser = ' + QuotedStr(aPasswood));
+          //
+          Result := FEntity.DataSet.RecordCount;
+     end;
 end;
 
 function TControllerSecurityDefault.AddLog(aLog: String): iControllerSecurityDefault;

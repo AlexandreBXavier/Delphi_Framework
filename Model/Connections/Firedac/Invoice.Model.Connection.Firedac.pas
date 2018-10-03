@@ -12,6 +12,7 @@ uses Invoice.Model.Interfaces, System.Classes, Data.DB, FireDAC.UI.Intf, FireDAC
 type
      TModelConnectionFiredac = class(TInterfacedObject, iModelConnection, iModelConnectionParametros)
      private
+          class var FInstance: TModelConnectionFiredac;
           FConnection: TFDConnection;
           FDGUIxWaitCursor1: TFDGUIxWaitCursor;
           FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink;
@@ -64,7 +65,10 @@ end;
 
 class function TModelConnectionFiredac.New: iModelConnection;
 begin
-     Result := Self.Create;
+     if not Assigned(FInstance) then
+          FInstance := Self.Create;
+     //
+     Result := FInstance;
 end;
 
 function TModelConnectionFiredac.Connection: TCustomConnection;

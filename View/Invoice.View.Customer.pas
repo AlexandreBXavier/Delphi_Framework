@@ -6,7 +6,7 @@ uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
      Vcl.ComCtrls, Invoice.Model.Interfaces, Invoice.View.Template.Register,
-  Vcl.StdCtrls;
+  Vcl.StdCtrls, frxClass, frxDBSet, Vcl.Mask;
 
 type
      TFormCustomer = class(TFormTemplateRegister)

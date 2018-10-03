@@ -14,6 +14,7 @@ uses
   Invoice.View.LogIn in 'View\Invoice.View.LogIn.pas' {FormLogin},
   Invoice.View.Main in 'View\Invoice.View.Main.pas' {FormMain},
   Invoice.View.Order in 'View\Invoice.View.Order.pas' {FormOrder},
+  Invoice.View.OrderProduct in 'View\Invoice.View.OrderProduct.pas' {FormOrderProduct},
   Invoice.View.Product in 'View\Invoice.View.Product.pas' {FormProduct},
   Invoice.View.Customer in 'View\Invoice.View.Customer.pas' {FormCustomer},
   Invoice.View.TypePayment in 'View\Invoice.View.TypePayment.pas' {FormTypePayment},

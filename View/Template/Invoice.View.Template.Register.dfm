@@ -21,21 +21,24 @@ object FormTemplateRegister: TFormTemplateRegister
   TextHeight = 13
   object PageControl: TPageControl
     Left = 0
-    Top = 57
+    Top = 55
     Width = 750
-    Height = 493
+    Height = 495
     ActivePage = TabList
     Align = alClient
     Images = DataModuleLocal.ImageListTabs
     TabOrder = 0
     TabPosition = tpBottom
+    ExplicitTop = 57
+    ExplicitHeight = 493
     object TabList: TTabSheet
       Caption = 'List of Records'
+      ExplicitHeight = 466
       object DBGridRecords: TDBGrid
         Left = 0
         Top = 0
         Width = 742
-        Height = 466
+        Height = 468
         Align = alClient
         DataSource = DataSource
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -53,6 +56,7 @@ object FormTemplateRegister: TFormTemplateRegister
     object TabInfo: TTabSheet
       Caption = 'Details of Record'
       ImageIndex = 1
+      ExplicitHeight = 466
       object LabelID: TLabel
         Left = 3
         Top = 21
@@ -76,7 +80,7 @@ object FormTemplateRegister: TFormTemplateRegister
     Left = 0
     Top = 0
     Width = 750
-    Height = 57
+    Height = 55
     Align = alTop
     TabOrder = 1
     object LabelField: TLabel

@@ -45,8 +45,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses Invoice.Controller.IniFile.Factory, Invoice.Controller.Connection.Factory, Invoice.Controller.Security.Factory,
-  Vcl.Dialogs;
+uses Vcl.Dialogs, Invoice.Controller.IniFile.Factory, Invoice.Controller.Connection.Factory, Invoice.Controller.Security.Factory;
 
 {$R *.dfm}
 
