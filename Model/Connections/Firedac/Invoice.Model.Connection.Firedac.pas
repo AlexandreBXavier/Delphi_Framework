@@ -47,18 +47,18 @@ uses
 
 constructor TModelConnectionFiredac.Create;
 begin
-     FConnection := TFDConnection.Create(nil);
-     FDGUIxWaitCursor1 := TFDGUIxWaitCursor.Create(nil);
      FDPhysMSSQLDriverLink1 := TFDPhysMSSQLDriverLink.Create(nil);
+     FDGUIxWaitCursor1 := TFDGUIxWaitCursor.Create(nil);
+     FConnection := TFDConnection.Create(nil);
 end;
 
 destructor TModelConnectionFiredac.Destroy;
 begin
      FConnection.Close;
      //
+     FConnection.Free;
      FDGUIxWaitCursor1.Free;
      FDPhysMSSQLDriverLink1.Free;
-     FConnection.Free;
      //
      inherited;
 end;
@@ -75,9 +75,12 @@ function TModelConnectionFiredac.Connection: TCustomConnection;
 begin
      Result := TCustomConnection(FConnection);
      //
-     LerParametros;
-     //
-     FConnection.Open;
+     if not FConnection.Connected then
+     begin
+          LerParametros;
+          //
+          FConnection.Open;
+     end;
 end;
 
 function TModelConnectionFiredac.DriverID(Value: String): iModelConnectionParametros;
