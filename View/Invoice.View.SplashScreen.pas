@@ -31,7 +31,7 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.AppInfo.Factory;
+uses Invoice.Controller.Facade;
 
 procedure TFormSplashScreen.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -48,8 +48,8 @@ end;
 procedure TFormSplashScreen.SetLabel;
 begin
      LabelSoftware.Caption := Application.Title;
-     LabelDeveloper.Caption := TControllerAppInfoFactory.New.Default.CompanyName;
-     LabelVersion.Caption := 'Version ' + TControllerAppInfoFactory.New.Default.FileVersion;
+     LabelDeveloper.Caption := TControllerGeneralFacade.New.AppInfoFactory.Default.CompanyName;
+     LabelVersion.Caption := 'Version ' + TControllerGeneralFacade.New.AppInfoFactory.Default.FileVersion;
 end;
 
 procedure TFormSplashScreen.TimerTimer(Sender: TObject);

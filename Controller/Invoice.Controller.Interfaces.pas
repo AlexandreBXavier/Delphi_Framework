@@ -90,6 +90,12 @@ type
           function DeCrypt(InString: String): String;
      end;
 
+     iControllerModelFacade = interface
+          ['{A5B19DB6-9347-4332-BFCA-A07AE1C7D0BD}']
+          function AppInfoFactory: iControllerAppInfoFactory;
+          function ChartFactory: iControllerChartFactory;
+     end;
+
 implementation
 
 end.

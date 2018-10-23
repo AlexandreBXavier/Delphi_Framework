@@ -36,6 +36,7 @@ uses
   Invoice.Controller.Query.Factory in 'Controller\Invoice.Controller.Query.Factory.pas',
   Invoice.Controller.Table.Factory in 'Controller\Invoice.Controller.Table.Factory.pas',
   Invoice.Controller.Connection.Factory in 'Controller\Invoice.Controller.Connection.Factory.pas',
+  Invoice.Controller.Facade in 'Controller\Invoice.Controller.Facade.pas',
   Invoice.Model.Interfaces in 'Model\Invoice.Model.Interfaces.pas',
   Invoice.Model.Connection.Firedac in 'Model\Connections\Firedac\Invoice.Model.Connection.Firedac.pas',
   Invoice.Model.Query.Firedac in 'Model\Connections\Firedac\Invoice.Model.Query.Firedac.pas',
