@@ -41,13 +41,13 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.DataModule, Invoice.Controller.AppInfo.Factory, Invoice.Controller.Security.Factory, Invoice.Controller.WinInfo.Factory;
+uses Invoice.Controller.DataModule, Invoice.Controller.Facade;
 
 procedure TFormLogin.SetLabel;
 begin
      LabelSoftware.Caption := Application.Title;
-     LabelDeveloper.Caption := TControllerAppInfoFactory.New.Default.CompanyName;
-     LabelVersion.Caption := 'Version ' + TControllerAppInfoFactory.New.Default.FileVersion;
+     LabelDeveloper.Caption := TControllerGeneralFacade.New.AppInfoFactory.Default.CompanyName;
+     LabelVersion.Caption := 'Version ' + TControllerGeneralFacade.New.AppInfoFactory.Default.FileVersion;
 end;
 
 procedure TFormLogin.btnCancelClick(Sender: TObject);
@@ -61,7 +61,7 @@ var
 begin
      if (EditUser.Text <> '') and (EditPassword.Text <> '') then
      begin
-          idUser := TControllerSecurityFactory.New.Default.LogIn(EditUser.Text, EditPassword.Text);
+          idUser := TControllerGeneralFacade.New.SecurityFactory.Default.LogIn(EditUser.Text, EditPassword.Text);
           //
           FLogin := (idUser > 0);
           //
@@ -102,7 +102,7 @@ end;
 
 procedure TFormLogin.FormShow(Sender: TObject);
 begin
-     EditUser.Text := TControllerWinInfoFactory.New.Default.UserName;
+     EditUser.Text := TControllerGeneralFacade.New.WinInfoFactory.Default.UserName;
      //
      EditPassword.Text := '';
 end;

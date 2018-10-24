@@ -55,13 +55,13 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.DataModule, Invoice.Controller.TabForm.Factory, Invoice.Controller.AppInfo.Factory, Invoice.Controller.WinInfo.Factory, Invoice.Controller.IniFile.Factory, Invoice.Controller.Security.Factory, Invoice.Controller.Connection.Factory, Invoice.Controller.Chart.Factory;
+uses Invoice.Controller.DataModule, Invoice.Controller.Facade;
 
 procedure TFormMain.ActionChartExecute(Sender: TObject);
 begin
      TAction(Sender).Enabled := False;
      //
-     TControllerTabFormFactory.New.Default.ShowForm(TabWelcome, 'FormChart');
+     TControllerGeneralFacade.New.TabFormFactory.Default.ShowForm(TabWelcome, 'FormChart');
      //
      TAction(Sender).Enabled := True;
 end;
@@ -129,22 +129,22 @@ procedure TFormMain.SetAction(Sender: TObject; nameForm: String);
 begin
      TAction(Sender).Enabled := False;
      //
-     TControllerTabFormFactory.New.Default.ShowForm(TControllerTabFormFactory.New.Default.CreateTab(TAction(Sender), PageControl), nameForm);
+     TControllerGeneralFacade.New.TabFormFactory.Default.ShowForm(TControllerGeneralFacade.New.TabFormFactory.Default.CreateTab(TAction(Sender), PageControl), nameForm);
      //
      TAction(Sender).Enabled := True;
 end;
 
 procedure TFormMain.SetStatus;
 begin
-     StatusBar.Panels[0].Text := 'Computer: ' + TControllerWinInfoFactory.New.Default.ComputerName;
+     StatusBar.Panels[0].Text := 'Computer: ' + TControllerGeneralFacade.New.WinInfoFactory.Default.ComputerName;
      StatusBar.Panels[1].Text := 'User: ' + DataModuleLocal.GetUsername;
-     StatusBar.Panels[2].Text := 'Version ' + TControllerAppInfoFactory.New.Default.FileVersion;
+     StatusBar.Panels[2].Text := 'Version ' + TControllerGeneralFacade.New.AppInfoFactory.Default.FileVersion;
      StatusBar.Panels[3].Text := 'Welcome to ' + Application.Title;
 end;
 
 procedure TFormMain.SetTitle;
 begin
-     Caption := TControllerAppInfoFactory.New.Default.CompanyName + ' - ' + Application.Title;
+     Caption := TControllerGeneralFacade.New.AppInfoFactory.Default.CompanyName + ' - ' + Application.Title;
      //
      Ribbon.Caption := Caption;
 end;

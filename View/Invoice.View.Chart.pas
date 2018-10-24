@@ -27,7 +27,7 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.Chart.Factory, Invoice.Controller.AppInfo.Factory;
+uses Invoice.Controller.Facade;
 
 
 procedure TFormChart.SetWebPage(WebAddress: String);
@@ -42,14 +42,14 @@ end;
 
 procedure TFormChart.FormShow(Sender: TObject);
 begin
-     //SetWebPage(TControllerAppInfoFactory.New.Default.LegalTrademarks);
+     //SetWebPage(TControllerGeneralFacade.New.AppInfoFactory.Default.LegalTrademarks);
      //
      SetWebChart;
 end;
 
 procedure TFormChart.SetWebChart;
 begin
-     TControllerChartFactory.New.Default
+     TControllerGeneralFacade.New.ChartFactory.Default
           .SetCharTitle('Sales in 2018')
           .SetCharSubTitle('Sales of Product 2018')
           .AddTitle('Product','Amount')
