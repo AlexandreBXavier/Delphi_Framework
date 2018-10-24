@@ -93,7 +93,11 @@ type
      iControllerModelFacade = interface
           ['{A5B19DB6-9347-4332-BFCA-A07AE1C7D0BD}']
           function AppInfoFactory: iControllerAppInfoFactory;
+          function IniFileFactory: iControllerIniFileFactory;
+          function SecurityFactory: iControllerSecurityFactory;
+          function TabFormFactory: iControllerTabFormFactory;
           function ChartFactory: iControllerChartFactory;
+          function WinInfoFactory: iControllerWinInfoFactory;
      end;
 
 implementation
