@@ -4,7 +4,7 @@ interface
 
 uses
      System.SysUtils, System.Classes, Data.DB, System.ImageList,
-     Vcl.ImgList, Vcl.Controls, Vcl.AppEvnts, Invoice.Model.Interfaces;
+     Vcl.ImgList, Vcl.Controls, Vcl.AppEvnts, Invoice.Controller.Interfaces;
 
 type
      TDataModuleLocal = class(TDataModule)

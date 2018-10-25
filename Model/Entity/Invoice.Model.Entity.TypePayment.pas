@@ -2,7 +2,7 @@ unit Invoice.Model.Entity.TypePayment;
 
 interface
 
-uses System.SysUtils, Data.DB, Invoice.Model.Interfaces, Invoice.Controller.Query.Factory;
+uses System.SysUtils, Data.DB, Invoice.Model.Interfaces, Invoice.Controller.Interfaces, Invoice.Controller.Query.Factory;
 
 type
      TModelEntityTypePayment = class(TInterfacedObject, iEntity)

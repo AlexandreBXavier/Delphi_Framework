@@ -3,11 +3,11 @@ unit Invoice.Model.Connection.Firedac;
 
 interface
 
-uses Invoice.Model.Interfaces, System.Classes, Data.DB, FireDAC.UI.Intf, FireDAC.VCLUI.Error,
+uses System.Classes, Data.DB, FireDAC.UI.Intf, FireDAC.VCLUI.Error,
      FireDAC.Stan.Error, FireDAC.VCLUI.Wait, FireDAC.Phys.MSSQLDef, FireDAC.Phys,
      FireDAC.Phys.ODBCBase, FireDAC.Phys.MSSQL, FireDAC.Comp.UI, FireDAC.Stan.Intf,
      FireDAC.Stan.Option, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
-     FireDAC.Stan.Async, FireDAC.Comp.Client;
+     FireDAC.Stan.Async, FireDAC.Comp.Client, Invoice.Controller.Interfaces;
 
 type
      TModelConnectionFiredac = class(TInterfacedObject, iModelConnection, iModelConnectionParametros)

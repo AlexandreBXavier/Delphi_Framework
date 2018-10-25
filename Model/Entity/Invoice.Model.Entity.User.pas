@@ -2,7 +2,7 @@ unit Invoice.Model.Entity.User;
 
 interface
 
-uses System.SysUtils, Data.DB, Invoice.Model.Interfaces, Invoice.Controller.Query.Factory;
+uses System.SysUtils, Data.DB, Invoice.Model.Interfaces, Invoice.Controller.Interfaces, Invoice.Controller.Query.Factory;
 
 type
      TModelEntityUser = class(TInterfacedObject, iEntity)

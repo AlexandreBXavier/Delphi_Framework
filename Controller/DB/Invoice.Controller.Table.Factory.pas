@@ -2,7 +2,7 @@ unit Invoice.Controller.Table.Factory;
 
 interface
 
-uses Data.DB, Invoice.Model.Interfaces, Invoice.Model.Table.Firedac;
+uses Data.DB, Invoice.Model.Interfaces, Invoice.Controller.Interfaces, Invoice.Model.Table.Firedac;
 
 type
      TControllerTableFactory = class(TInterfacedObject, iModelTableFactory)

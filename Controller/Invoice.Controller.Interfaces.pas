@@ -2,7 +2,7 @@ unit Invoice.Controller.Interfaces;
 
 interface
 
-uses Vcl.ComCtrls, Vcl.ActnList, System.Classes, SHDocVw, Invoice.Model.Interfaces;
+uses Vcl.ComCtrls, Vcl.ActnList, System.Classes, Data.DB, SHDocVw, Invoice.Model.Interfaces;
 
 type
      iControllerIniFileDefault = interface;
@@ -10,6 +10,55 @@ type
      iControllerAppInfoDefault = interface;
      iControllerTabFormDefault = interface;
      iControllerSecurityDefault = interface;
+     iModelConnectionParametros = interface;
+
+     iModelConnection = interface
+          ['{E8538D27-DFF2-4485-A303-616176681A93}']
+          function Connection: TCustomConnection;
+          function Parametros: iModelConnectionParametros;
+     end;
+
+     iModelConnectionParametros = interface
+          ['{69BA62BF-43C2-495B-8E0B-C5B6D509FFCB}']
+          function DriverID(Value: String): iModelConnectionParametros;
+          function Server(Value: String): iModelConnectionParametros;
+          function Porta(Value: Integer): iModelConnectionParametros;
+          function Database(Value: String): iModelConnectionParametros;
+          function UserName(Value: String): iModelConnectionParametros;
+          function Password(Value: String): iModelConnectionParametros;
+          function EndParametros: iModelConnection;
+     end;
+
+     iModelConnectionFactory = interface
+          ['{20983058-4995-49E6-86B8-F638E5C05743}']
+          function ConnectionFiredac : iModelConnection;
+     end;
+
+     iEntity = interface
+          ['{976C5307-B7E8-4C8B-B283-D24DB4ED11F0}']
+          function List: iEntity;
+          function ListWhere(aSQL: String): iEntity;
+          function DataSet: TDataSet;
+          function OrderBy(aFieldName: String): iEntity;
+     end;
+
+     iModelEntityFactory = interface
+          ['{0A4C9901-4FEB-4277-A62B-444457C251DE}']
+          function User(Connection: iModelConnection): iEntity;
+          function Product(Connection: iModelConnection): iEntity;
+          function TypePayment(Connection: iModelConnection): iEntity;
+          function Customer(Connection: iModelConnection): iEntity;
+     end;
+
+     iModelTableFactory = interface
+          ['{5C7FAC45-B671-4897-B18F-CCAE970B8885}']
+          function Table(Connection: iModelConnection): iTable;
+     end;
+
+     iModelQueryFactory = interface
+          ['{8E2C37DF-507C-4539-88B4-75B093774BDA}']
+          function Query(Connection: iModelConnection): iQuery;
+     end;
 
      iControllerIniFileFactory = interface
           ['{353DEFB6-3AF0-44D0-84EB-D520E664417E}']
@@ -105,7 +154,6 @@ type
           function WinInfoFactory: iControllerWinInfoFactory;
           function EntityFactory: iModelEntityFactory;
      end;
-
 
 implementation
 

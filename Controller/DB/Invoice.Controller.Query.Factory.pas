@@ -2,7 +2,7 @@ unit Invoice.Controller.Query.Factory;
 
 interface
 
-uses Data.DB, Invoice.Model.Interfaces, Invoice.Model.Query.Firedac;
+uses Data.DB, Invoice.Controller.Interfaces, Invoice.Model.Interfaces, Invoice.Model.Query.Firedac;
 
 type
      TControllerQueryFactory = class(TInterfacedObject, iModelQueryFactory)

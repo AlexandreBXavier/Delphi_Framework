@@ -5,7 +5,7 @@ interface
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-     Invoice.Model.Interfaces;
+     Invoice.Controller.Interfaces;
 
 type
      TFormOrder = class(TForm)

@@ -2,7 +2,7 @@ unit Invoice.Controller.Entity.Factory;
 
 interface
 
-uses Data.DB, Invoice.Model.Interfaces;
+uses Data.DB, Invoice.Controller.Interfaces;
 
 type
      TControllerEntityFactory = class(TInterfacedObject, iModelEntityFactory)
