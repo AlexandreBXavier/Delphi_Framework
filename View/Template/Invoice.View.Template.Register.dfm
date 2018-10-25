@@ -29,10 +29,11 @@ object FormTemplateRegister: TFormTemplateRegister
     Images = DataModuleLocal.ImageListTabs
     TabOrder = 0
     TabPosition = tpBottom
-    ExplicitTop = 57
-    ExplicitHeight = 493
     object TabList: TTabSheet
       Caption = 'List of Records'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 466
       object DBGridRecords: TDBGrid
         Left = 0
@@ -56,6 +57,9 @@ object FormTemplateRegister: TFormTemplateRegister
     object TabInfo: TTabSheet
       Caption = 'Details of Record'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 466
       object LabelID: TLabel
         Left = 3

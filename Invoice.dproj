@@ -95,8 +95,8 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>Invoice.ico</Icon_MainIcon>
-        <VerInfo_Build>231</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.231;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=http://www.embarcadero.com;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
+        <VerInfo_Build>240</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Developer Inc;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.240;InternalName=AppInvoice;LegalCopyright=2018, Invoice, All Rights Reserved;LegalTrademarks=http://www.embarcadero.com;OriginalFilename=AppInvoice;ProgramID=com.Invoice.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Invoice</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -171,6 +171,7 @@
         <DCCReference Include="Controller\Chart\Invoice.Controller.Chart.Factory.pas"/>
         <DCCReference Include="Controller\DB\Invoice.Controller.Query.Factory.pas"/>
         <DCCReference Include="Controller\DB\Invoice.Controller.Table.Factory.pas"/>
+        <DCCReference Include="Controller\DB\Invoice.Controller.Entity.Factory.pas"/>
         <DCCReference Include="Controller\DB\Invoice.Controller.Connection.Factory.pas"/>
         <DCCReference Include="Controller\Invoice.Controller.Facade.pas"/>
         <DCCReference Include="Model\Invoice.Model.Interfaces.pas"/>

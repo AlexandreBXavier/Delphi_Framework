@@ -52,6 +52,14 @@ type
           function OrderBy(aFieldName: String): iEntity;
      end;
 
+     iModelEntityFactory = interface
+          ['{0A4C9901-4FEB-4277-A62B-444457C251DE}']
+          function User(Connection: iModelConnection): iEntity;
+          function Product(Connection: iModelConnection): iEntity;
+          function TypePayment(Connection: iModelConnection): iEntity;
+          function Customer(Connection: iModelConnection): iEntity;
+     end;
+
      iModelTableFactory = interface
           ['{5C7FAC45-B671-4897-B18F-CCAE970B8885}']
           function Table(Connection: iModelConnection): iTable;

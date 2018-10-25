@@ -5,8 +5,8 @@ interface
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-     Vcl.ComCtrls, Invoice.Model.Interfaces, Invoice.View.Template.Register,
-  Vcl.StdCtrls, frxClass, frxDBSet, Vcl.Mask;
+     Vcl.ComCtrls, Vcl.StdCtrls, frxClass, frxDBSet, Vcl.Mask, Invoice.View.Template.Register,
+     Invoice.Model.Interfaces;
 
 type
      TFormCustomer = class(TFormTemplateRegister)
@@ -24,11 +24,11 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.DataModule, Invoice.Model.Entity.Customer;
+uses Invoice.Controller.DataModule, Invoice.Controller.Facade;
 
 function TFormCustomer.GetEntity: iEntity;
 begin
-     Result := TModelEntityCustomer.New(DataModuleLocal.GetConnection);
+     Result := TControllerGeneralFacade.New.EntityFactory.Customer(DataModuleLocal.GetConnection);
 end;
 
 Initialization

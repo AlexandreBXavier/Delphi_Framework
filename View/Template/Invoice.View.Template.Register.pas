@@ -5,7 +5,7 @@ interface
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ExtCtrls,
-     Vcl.DBCtrls, Vcl.StdCtrls, Invoice.Model.Interfaces, frxClass, frxDBSet, Vcl.Mask;
+     Vcl.DBCtrls, Vcl.StdCtrls, frxClass, frxDBSet, Vcl.Mask, Invoice.Model.Interfaces;
 
 type
      TFormTemplateRegister = class(TForm)

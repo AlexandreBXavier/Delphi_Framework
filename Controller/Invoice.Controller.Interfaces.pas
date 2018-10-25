@@ -2,7 +2,7 @@ unit Invoice.Controller.Interfaces;
 
 interface
 
-uses Vcl.ComCtrls, Vcl.ActnList, System.Classes, SHDocVw;
+uses Vcl.ComCtrls, Vcl.ActnList, System.Classes, SHDocVw, Invoice.Model.Interfaces;
 
 type
      iControllerIniFileDefault = interface;
@@ -90,6 +90,11 @@ type
           function DeCrypt(InString: String): String;
      end;
 
+     iControllerEntityFactory = interface
+          ['{1695B22D-2EA4-4471-B1AA-D8F567588881}']
+          function Default: iModelEntityFactory;
+     end;
+
      iControllerModelFacade = interface
           ['{A5B19DB6-9347-4332-BFCA-A07AE1C7D0BD}']
           function AppInfoFactory: iControllerAppInfoFactory;
@@ -98,7 +103,9 @@ type
           function TabFormFactory: iControllerTabFormFactory;
           function ChartFactory: iControllerChartFactory;
           function WinInfoFactory: iControllerWinInfoFactory;
+          function EntityFactory: iModelEntityFactory;
      end;
+
 
 implementation
 

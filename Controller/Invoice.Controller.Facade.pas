@@ -3,7 +3,7 @@ unit Invoice.Controller.Facade;
 interface
 
 uses
-     Invoice.Controller.Interfaces;
+     Invoice.Controller.Interfaces, Invoice.Model.Interfaces;
 
 type
      TControllerGeneralFacade = class(TInterfacedObject, iControllerModelFacade)
@@ -14,6 +14,7 @@ type
           FIniFile: iControllerIniFileFactory;
           FSecurity: iControllerSecurityFactory;
           FTabForm: iControllerTabFormFactory;
+          FEntity: iModelEntityFactory;
      public
           constructor Create;
           destructor Destroy; Override;
@@ -24,6 +25,7 @@ type
           function TabFormFactory: iControllerTabFormFactory;
           function ChartFactory: iControllerChartFactory;
           function WinInfoFactory: iControllerWinInfoFactory;
+          function EntityFactory: iModelEntityFactory;
      end;
 
 implementation
@@ -32,7 +34,7 @@ implementation
 
 uses
      Invoice.Controller.Chart.Factory, Invoice.Controller.AppInfo.Factory, Invoice.Controller.IniFile.Factory, Invoice.Controller.Security.Factory,
-     Invoice.Controller.TabForm.Factory, Invoice.Controller.WinInfo.Factory;
+     Invoice.Controller.TabForm.Factory, Invoice.Controller.WinInfo.Factory, Invoice.Controller.Entity.Factory;
 
 function TControllerGeneralFacade.AppInfoFactory: iControllerAppInfoFactory;
 begin
@@ -56,6 +58,13 @@ end;
 destructor TControllerGeneralFacade.Destroy;
 begin
      inherited;
+end;
+
+function TControllerGeneralFacade.EntityFactory: iModelEntityFactory;
+begin
+     FEntity := TControllerEntityFactory.New;
+     //
+     Result := FEntity;
 end;
 
 function TControllerGeneralFacade.IniFileFactory: iControllerIniFileFactory;

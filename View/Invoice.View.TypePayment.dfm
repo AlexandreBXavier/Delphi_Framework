@@ -1,7 +1,5 @@
 inherited FormTypePayment: TFormTypePayment
   Caption = 'Form Type of Payment'
-  OnCreate = FormCreate
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl: TPageControl
@@ -12,9 +10,24 @@ inherited FormTypePayment: TFormTypePayment
       Caption = 'Details of Type of Payment'
     end
   end
-  inherited PanelNavigator: TPanel
-    inherited EditValue: TEdit
-      OnEnter = ButtonFindClick
+  inherited frxReportModel: TfrxReport
+    Datasets = <
+      item
+        DataSet = frxDBDataset
+        DataSetName = 'frxDBDataset'
+      end>
+    Variables = <>
+    Style = <>
+    inherited Page1: TfrxReportPage
+      inherited ReportTitle: TfrxReportTitle
+        inherited MemoTitle: TfrxMemoView
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+      end
     end
   end
 end

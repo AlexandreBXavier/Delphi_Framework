@@ -4,8 +4,8 @@ interface
 
 uses
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-     Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.Grids,
-     Vcl.DBGrids, Vcl.ExtCtrls, Invoice.Model.Interfaces;
+     Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
+     Invoice.Model.Interfaces;
 
 type
      TFormOrder = class(TForm)
@@ -43,7 +43,7 @@ implementation
 
 {$R *.dfm}
 
-uses Invoice.Controller.DataModule, Invoice.Model.Entity.Customer, Invoice.View.OrderProduct;
+uses Invoice.Controller.DataModule, Invoice.Controller.Facade, Invoice.View.OrderProduct;
 
 procedure TFormOrder.ButtonFindClick(Sender: TObject);
 begin
@@ -87,7 +87,7 @@ end;
 procedure TFormOrder.FormCreate(Sender: TObject);
 begin
      try
-          FEntity := TModelEntityCustomer.New(DataModuleLocal.GetConnection);
+          FEntity := TControllerGeneralFacade.New.EntityFactory.Customer(DataModuleLocal.GetConnection);
           //
           FEntity.List;
           //
